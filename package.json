@@ -1,0 +1,34 @@
+{
+  "name": "the-derelict",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A survival gambling game with server-blind hands, settled in shielded ZEC.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "start": "node server/index.mjs",
+    "server": "node server/index.mjs",
+    "dev": "node scripts/dev.mjs",
+    "build": "vite build web",
+    "test": "node --test test/",
+    "e2e": "node e2e/protocol.mjs",
+    "ui": "node e2e/ui.mjs",
+    "ui:stake": "node e2e/ui-stake.mjs",
+    "ui:modals": "node e2e/ui-modals.mjs",
+    "stack": "node e2e/stack.mjs",
+    "audit": "node scripts/verify-audit.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
+    "puppeteer-core": "^25.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^7.3.7"
+  }
+}

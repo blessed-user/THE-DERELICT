@@ -1,0 +1,11 @@
+# Normalize source line endings; entry-point scripts must stay LF for sh.
+* text=auto eol=lf
+*.sh text eol=lf
+
+# Vendored and generated binary artifacts.
+docker/zecd/zecd binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.woff2 binary

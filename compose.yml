@@ -1,0 +1,80 @@
+# THE DERELICT — fully self-contained regtest stack.
+#   zebra (own chain, coinbase to the public test-vector address)
+#   -> funder zecd (restores the demo seed, shields the coinbase)
+#   -> bootstrap (one-shot: mine, shield, verify a spendable note)
+#   -> derelict (game + built SPA, shielded entry and payout)
+#
+# Copy .env.example to .env before the first run. Everything here is demo
+# infrastructure on a private regtest chain; never put a real seed in .env.
+name: derelict
+
+services:
+  zebra:
+    image: zfnd/zebra:6.3.0
+    command: ["zebrad", "-c", "/etc/zebra/zebrad.toml", "start"]
+    environment:
+      - ZEBRA_STATE__CACHE_DIR=/var/cache/zebra
+    volumes:
+      - ./regtest/zebrad.toml:/etc/zebra/zebrad.toml:ro
+      - zebra-state:/var/cache/zebra
+    ports:
+      - "127.0.0.1:18234:18234"
+
+  funder:
+    build: ./docker/zecd
+    depends_on:
+      - zebra
+    environment:
+      - ZECD_MNEMONIC=${ZECD_MNEMONIC:?set ZECD_MNEMONIC in .env (public test vector for demo)}
+      - ZEBRA_RPC=http://zebra:18234/
+      - ZECD_REGTEST_NU63_HEIGHT=8
+    volumes:
+      - ./regtest/zecd.toml:/etc/zecd/zecd.toml:ro
+      - funder-data:/var/lib/zecd
+    ports:
+      - "127.0.0.1:18242:18242"
+      - "127.0.0.1:9243:9243"
+
+  bootstrap:
+    image: node:22-alpine
+    depends_on:
+      - zebra
+      - funder
+    environment:
+      - ZEBRA_URL=http://zebra:18234/
+      - FUNDER_URL=http://funder:18242/
+      - FUNDER_USER=funder
+      - FUNDER_PASS=regtest-funder-pw
+      - BRINGUP_BLOCKS=${BRINGUP_BLOCKS:-105}
+    volumes:
+      - ./e2e/bootstrap.mjs:/bootstrap.mjs:ro
+    command: ["node", "/bootstrap.mjs"]
+
+  derelict:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      funder:
+        condition: service_started
+    environment:
+      - PORT=8791
+      - DATA_DIR=/data
+      - CHAIN_MODE=regtest
+      - ZECD_URL=http://funder:18242/
+      - ZECD_USER=funder
+      - ZECD_PASS=regtest-funder-pw
+      - ZEBRA_URL=http://zebra:18234/
+      - AUTO_MINE=1
+      - PHASE_SCALE=${PHASE_SCALE:-1}
+    ports:
+      - "127.0.0.1:8791:8791"
+    volumes:
+      - derelict-data:/data
+
+volumes:
+  zebra-state:
+  funder-data:
+  derelict-data:

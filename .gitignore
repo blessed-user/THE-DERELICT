@@ -1,0 +1,28 @@
+# runtime and build output
+node_modules/
+web/dist/
+data/
+data-e2e/
+data-ui/
+*.db
+*.db-shm
+*.db-wal
+
+# local demo configuration — never commit a real seed
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# deployment and test artifacts
+.vercel/
+e2e/audit.json
+e2e/staked-audit.json
+e2e/*.log
+e2e/*.png
+
+# logs and editor noise
+*.log
+.DS_Store
+Thumbs.db
+*.tsbuildinfo

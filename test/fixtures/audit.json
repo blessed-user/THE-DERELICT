@@ -1,0 +1,2602 @@
+{
+  "version": 1,
+  "game": "the-derelict",
+  "tableId": "e89d56d72f69c0ee1c5b3747",
+  "mode": "practice",
+  "stakeZats": 0,
+  "createdAt": 1792538785120,
+  "startedAt": 1792538785120,
+  "finishedAt": 1792538797279,
+  "config": {
+    "rpsHand": [
+      "rock",
+      "rock",
+      "paper",
+      "paper",
+      "scissors",
+      "scissors"
+    ],
+    "startStars": 3,
+    "startChips": 40,
+    "loanPrincipal": 40,
+    "loanRepay": 64,
+    "dealerBuy": 20,
+    "dealerSell": 50,
+    "ecardRounds": 5,
+    "ecardStartChips": 100
+  },
+  "act1": {
+    "rounds": [
+      {
+        "cycle": 1,
+        "pair": [
+          0,
+          1
+        ],
+        "cards": {
+          "a": "scissors",
+          "b": "scissors"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 3,
+          "b": 3
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 3
+        }
+      },
+      {
+        "cycle": 1,
+        "pair": [
+          2,
+          3
+        ],
+        "cards": {
+          "a": "rock",
+          "b": "scissors"
+        },
+        "outcome": "a",
+        "transfer": 1,
+        "starsBefore": {
+          "a": 3,
+          "b": 3
+        },
+        "starsAfter": {
+          "a": 4,
+          "b": 2
+        }
+      },
+      {
+        "cycle": 2,
+        "pair": [
+          1,
+          3
+        ],
+        "cards": {
+          "a": "paper",
+          "b": "paper"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 3,
+          "b": 2
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 2
+        }
+      },
+      {
+        "cycle": 2,
+        "pair": [
+          0,
+          2
+        ],
+        "cards": {
+          "a": "paper",
+          "b": "paper"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 3,
+          "b": 4
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 4
+        }
+      },
+      {
+        "cycle": 3,
+        "pair": [
+          0,
+          3
+        ],
+        "cards": {
+          "a": "rock",
+          "b": "scissors"
+        },
+        "outcome": "a",
+        "transfer": 1,
+        "starsBefore": {
+          "a": 3,
+          "b": 2
+        },
+        "starsAfter": {
+          "a": 4,
+          "b": 1
+        }
+      },
+      {
+        "cycle": 3,
+        "pair": [
+          2,
+          1
+        ],
+        "cards": {
+          "a": "scissors",
+          "b": "rock"
+        },
+        "outcome": "b",
+        "transfer": 1,
+        "starsBefore": {
+          "a": 4,
+          "b": 3
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 4
+        }
+      },
+      {
+        "cycle": 4,
+        "pair": [
+          2,
+          3
+        ],
+        "cards": {
+          "a": "rock",
+          "b": "rock"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 3,
+          "b": 1
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 1
+        }
+      },
+      {
+        "cycle": 4,
+        "pair": [
+          0,
+          1
+        ],
+        "cards": {
+          "a": "scissors",
+          "b": "scissors"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 4,
+          "b": 4
+        },
+        "starsAfter": {
+          "a": 4,
+          "b": 4
+        }
+      },
+      {
+        "cycle": 5,
+        "pair": [
+          2,
+          3
+        ],
+        "cards": {
+          "a": "paper",
+          "b": "paper"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 3,
+          "b": 2
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 2
+        }
+      },
+      {
+        "cycle": 5,
+        "pair": [
+          0,
+          1
+        ],
+        "cards": {
+          "a": "rock",
+          "b": "rock"
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "starsBefore": {
+          "a": 4,
+          "b": 4
+        },
+        "starsAfter": {
+          "a": 4,
+          "b": 4
+        }
+      },
+      {
+        "cycle": 6,
+        "pair": [
+          1,
+          2
+        ],
+        "cards": {
+          "a": "paper",
+          "b": "scissors"
+        },
+        "outcome": "b",
+        "transfer": 1,
+        "starsBefore": {
+          "a": 4,
+          "b": 3
+        },
+        "starsAfter": {
+          "a": 3,
+          "b": 4
+        }
+      },
+      {
+        "cycle": 6,
+        "pair": [
+          3,
+          0
+        ],
+        "cards": {
+          "a": "rock",
+          "b": "paper"
+        },
+        "outcome": "b",
+        "transfer": 1,
+        "starsBefore": {
+          "a": 2,
+          "b": 4
+        },
+        "starsAfter": {
+          "a": 1,
+          "b": 5
+        }
+      }
+    ],
+    "playArchive": [
+      {
+        "cycle": 1,
+        "pairings": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "bye": null,
+        "plays": {
+          "0": {
+            "commit": "fd9b5232150f98ca1cf6741f75d323a685b7c5959197188744bd846a8831a227",
+            "reveal": {
+              "card": "scissors",
+              "index": 0,
+              "salt": "103f83a9243eeb6a0e690b2c808e2c2c",
+              "proof": [
+                {
+                  "hash": "48810eff8aa870fa8299e444fc8b7734861148380c7d121571cee37ab1278a53",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "5dd5a6573d36e83c56309ad4f85804207368451382b558da08496ad3883c6aee",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "dfa698f973094704decbe38d87483bb0f133161ddb03f06ea084891f0612c54f",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "74a7395aa226dcbd8eefdb4b4decadb9",
+              "leaf": "c67a0fa13ff12050783dd56a5736b2ab7697abfc439a653f53f848284ac2c7c5"
+            }
+          },
+          "1": {
+            "commit": "46df5e5c6a85a6e08a02341e1dec823ce76ee1aa5bcabe0c3239500ba1c02b24",
+            "reveal": {
+              "card": "scissors",
+              "index": 5,
+              "salt": "2a80b987877be2630d37e95fa0ed0353",
+              "proof": [
+                {
+                  "hash": "9edd39e650f0ab8a352bb330a95c113cbe4c130f57c8c25355c527b92f732a7e",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "895c10f64ad3ba18d0322b1725fbf1d1cba8ca322fa3de6cc1c3d596272685f2",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "c4e2e6199ff3643b52a4b6b4f368a1fd",
+              "leaf": "404502525003434130c91afb04cb4bce28e72c83dc1329681fe562de1d563aaa"
+            }
+          },
+          "2": {
+            "commit": "9d1e3549bfaa61fbaac04cfe0fd57f6c8feaf604d29973945dee210ca6c77224",
+            "reveal": {
+              "card": "rock",
+              "index": 2,
+              "salt": "82474c22629ed487194075b6d56078fe",
+              "proof": [
+                {
+                  "hash": "5b1731b55047010b92cff84c796a2e005087288cfb08eed815f6a289198a7727",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "050c57ab752f5adb0baa61c0bc1144dcd13ec76f8d728b725480130cab93f1f7",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "29c5e06cf3c5d41db2c02b341442752ed0ace5e5b7d72b52e374afa701b8e004",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "d6bf22de696f3deb65147cf5526d42e3",
+              "leaf": "c94de44e5efe0a33f5e3507319b4f5aaaa0295633b10e44aadadaca1ab4ce2ee"
+            }
+          },
+          "3": {
+            "commit": "4cc766fb5031e412af0b69c92e307fbc0a28040e59d09279d46988e447bbb130",
+            "reveal": {
+              "card": "scissors",
+              "index": 0,
+              "salt": "ae55059b9a7261489af1c5fbe52f748d",
+              "proof": [
+                {
+                  "hash": "8b5faa7331fa3f1d77ee3a03a4f66093cff65a8088b57b0f3711a18854fd6555",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "ec33ad56b737cc3917229246d29021cf00a77b658b00da590bdf467356453c91",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "ac8f345309b5e93557da938438bf90155f37dcb59af79a02fd4131b8f839ec52",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "9f2356b4fe0b84c87e31fe131a3ac9d1",
+              "leaf": "d8e4c64ed4172fff7f6fd4594ce906bd9db88b8b21dd8e666dc9004df0d667c0"
+            }
+          }
+        }
+      },
+      {
+        "cycle": 2,
+        "pairings": [
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "bye": null,
+        "plays": {
+          "0": {
+            "commit": "4f53701c50c697a925fe2606209b16f94fb923495be47f0371c30e8d53d8491d",
+            "reveal": {
+              "card": "paper",
+              "index": 1,
+              "salt": "f550c64b24ab8c64417cf400151990f1",
+              "proof": [
+                {
+                  "hash": "c67a0fa13ff12050783dd56a5736b2ab7697abfc439a653f53f848284ac2c7c5",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "5dd5a6573d36e83c56309ad4f85804207368451382b558da08496ad3883c6aee",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "dfa698f973094704decbe38d87483bb0f133161ddb03f06ea084891f0612c54f",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "0e3dd5afeeee2b6ad1fa5fb07337dc22",
+              "leaf": "48810eff8aa870fa8299e444fc8b7734861148380c7d121571cee37ab1278a53"
+            }
+          },
+          "1": {
+            "commit": "5396559c0d1a0d887800856d5e568fa3df08655b30e29f7260a673403f885a09",
+            "reveal": {
+              "card": "paper",
+              "index": 0,
+              "salt": "70adccb0e159bda483be1514f21bb59a",
+              "proof": [
+                {
+                  "hash": "70f9717f59b348da98df8d208fe75884ce7b84a90160ef0a065aa9f85c9596d8",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "31331e73f4b017d658e2761c44edcd2649769d94c3542111788480a00f393b2f",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "5bafc198552e2a8f3bf2f08b43e37035708741227779e62ac5fdcb3fb82db240",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "221bcd2732b24dc6c202044a7c0b144c",
+              "leaf": "953426682c3a1760907a770afb3573338ad0fa19945c40c8e352ce9fc88f15f5"
+            }
+          },
+          "2": {
+            "commit": "8dd0b13a77a557c78eafcc4d453c08ea5747e6437c1d84e793efd0b1496120df",
+            "reveal": {
+              "card": "paper",
+              "index": 4,
+              "salt": "710ac4796b67be29771b14924f89bfc7",
+              "proof": [
+                {
+                  "hash": "758a78267f2ab1497c067370facc15ed24a432e2bc2a01ee21ee73d6ff6283d0",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "fc09b480be95008676e0605644c749cc3306e0577a8879fed57ec664e9df04b0",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "01084746008e27c7860645753a71bea0",
+              "leaf": "ddd108ef76b2a8a1a08f83382320c9adf73bfb8d5fcfac38360af3f4a916acb8"
+            }
+          },
+          "3": {
+            "commit": "cf6e61ec158941b03fd243d196435f9199dc30d63a76a983c54c2baeee6c94a9",
+            "reveal": {
+              "card": "paper",
+              "index": 2,
+              "salt": "77e3962c6c2269fd186ac4aa70277392",
+              "proof": [
+                {
+                  "hash": "91e7da1a50c90cfea16404c1d3dfda04b07f3851fef0445c0302f97a03755841",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "649b06bb30864aa08f0e2e6da8b5195a46113666e5c28766c9dcb19687f8c5a5",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "ac8f345309b5e93557da938438bf90155f37dcb59af79a02fd4131b8f839ec52",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "9740ce9d4dd274107de3cca1e7e3850c",
+              "leaf": "cb877e6960702e305ed36560609f65beec14253d2da0507b1df65deef6dad2e9"
+            }
+          }
+        }
+      },
+      {
+        "cycle": 3,
+        "pairings": [
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "bye": null,
+        "plays": {
+          "0": {
+            "commit": "ae5419855db5bc1691e2c3143bcc7e4db7fda61f8a807e6cc95f923c43812932",
+            "reveal": {
+              "card": "rock",
+              "index": 2,
+              "salt": "21b67f4dab54b04a1db688d33a8a5809",
+              "proof": [
+                {
+                  "hash": "3b9a7ed153897005d988cac7b9355b384a9f46f8268f5be24eff2a1d9f390c95",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "7fe4b680e42b11f71776fdeca6d17c842d0ba27816e7066fb54abde3a8759f76",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "dfa698f973094704decbe38d87483bb0f133161ddb03f06ea084891f0612c54f",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "20730eb4055257f1bacb360dc0890f12",
+              "leaf": "b777a1f9b5c9c79e2f86790e344d02d2f34dd07994b6fad73eed09f164365061"
+            }
+          },
+          "1": {
+            "commit": "916137187494b33de8d646d0f6e24be154540a808844cb8cd4aaf1e9ca8038f0",
+            "reveal": {
+              "card": "rock",
+              "index": 1,
+              "salt": "0c38b20587048e7c9c2c27162195a685",
+              "proof": [
+                {
+                  "hash": "953426682c3a1760907a770afb3573338ad0fa19945c40c8e352ce9fc88f15f5",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "31331e73f4b017d658e2761c44edcd2649769d94c3542111788480a00f393b2f",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "5bafc198552e2a8f3bf2f08b43e37035708741227779e62ac5fdcb3fb82db240",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "4fd171bb896c4a2701eafadb0cee516a",
+              "leaf": "70f9717f59b348da98df8d208fe75884ce7b84a90160ef0a065aa9f85c9596d8"
+            }
+          },
+          "2": {
+            "commit": "7c02a8bdb43681328ca317503a15582fb57ab1112375e634ea07ca8def6969b8",
+            "reveal": {
+              "card": "scissors",
+              "index": 0,
+              "salt": "92f4f44b4c6dabca968b9c27a17818b2",
+              "proof": [
+                {
+                  "hash": "081423f440873cbff6d91625a3fc398a202a0f8002db88d87cd9683930105ad2",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "9978073d795ac2dfa7912157b5e3697bce16cd11777925f4bc4a2776a84e2f41",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "29c5e06cf3c5d41db2c02b341442752ed0ace5e5b7d72b52e374afa701b8e004",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "94a1dfcc7c5ed70ca08ec0427e7a2988",
+              "leaf": "ac0234779d15981d4797dd6d8c697f2406250a6c415180f22d7bd8cf35666b11"
+            }
+          },
+          "3": {
+            "commit": "14324d15c4b439d06eaf99b3ff2422d94d822a85486995df099f5b77c2adb5fb",
+            "reveal": {
+              "card": "scissors",
+              "index": 1,
+              "salt": "40ecea6fc53e8353d08ec801b312af66",
+              "proof": [
+                {
+                  "hash": "d8e4c64ed4172fff7f6fd4594ce906bd9db88b8b21dd8e666dc9004df0d667c0",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "ec33ad56b737cc3917229246d29021cf00a77b658b00da590bdf467356453c91",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "ac8f345309b5e93557da938438bf90155f37dcb59af79a02fd4131b8f839ec52",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "719068eb3fa6869d863b36230689befa",
+              "leaf": "8b5faa7331fa3f1d77ee3a03a4f66093cff65a8088b57b0f3711a18854fd6555"
+            }
+          }
+        }
+      },
+      {
+        "cycle": 4,
+        "pairings": [
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "bye": null,
+        "plays": {
+          "0": {
+            "commit": "043c54a909debb9c793ca20332521263f481743756e4db0a23a55be95df7c833",
+            "reveal": {
+              "card": "scissors",
+              "index": 3,
+              "salt": "991d9251c3052f72d1f8f1415f780bc3",
+              "proof": [
+                {
+                  "hash": "b777a1f9b5c9c79e2f86790e344d02d2f34dd07994b6fad73eed09f164365061",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "7fe4b680e42b11f71776fdeca6d17c842d0ba27816e7066fb54abde3a8759f76",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "dfa698f973094704decbe38d87483bb0f133161ddb03f06ea084891f0612c54f",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "c681b16bfa409db645169e662d1c277b",
+              "leaf": "3b9a7ed153897005d988cac7b9355b384a9f46f8268f5be24eff2a1d9f390c95"
+            }
+          },
+          "1": {
+            "commit": "1602ab5d3ae7833830b4e0c75fda63275e8e14323533ec2031f9d10854f39973",
+            "reveal": {
+              "card": "scissors",
+              "index": 2,
+              "salt": "b363858a3b7a6ced6097115ea5e2a8b5",
+              "proof": [
+                {
+                  "hash": "d25cc9183a5f3f7e81247a72cc69ca737f804585ee2db6940f93e3adac8d5ad7",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "eb6ec71ceda484c08afeec88c3b737addbe1f30b380f99b3b991594056dd94f9",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "5bafc198552e2a8f3bf2f08b43e37035708741227779e62ac5fdcb3fb82db240",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "d737463bcac71fe7af6bb8bf14a1698b",
+              "leaf": "ac3b6429e7572d16499da4efaef6844c962bbc173e4fc764b86c7aca5a91797c"
+            }
+          },
+          "2": {
+            "commit": "4ccce6a9919a4161d92b88c7815885def1ebfeef63bad67c72b2b8a87faf2275",
+            "reveal": {
+              "card": "rock",
+              "index": 1,
+              "salt": "a743a9e5b292c01db333f040d7a8506d",
+              "proof": [
+                {
+                  "hash": "ac0234779d15981d4797dd6d8c697f2406250a6c415180f22d7bd8cf35666b11",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "9978073d795ac2dfa7912157b5e3697bce16cd11777925f4bc4a2776a84e2f41",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "29c5e06cf3c5d41db2c02b341442752ed0ace5e5b7d72b52e374afa701b8e004",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "598f8bbb220e7690b3b06c68497945cc",
+              "leaf": "081423f440873cbff6d91625a3fc398a202a0f8002db88d87cd9683930105ad2"
+            }
+          },
+          "3": {
+            "commit": "6e18e428fe2fec2d46b22dd3d13e115b063dec953b65514b939ee9ac51f76d1a",
+            "reveal": {
+              "card": "rock",
+              "index": 3,
+              "salt": "f68512a0a29bcc3c5de05cc70dabd56e",
+              "proof": [
+                {
+                  "hash": "cb877e6960702e305ed36560609f65beec14253d2da0507b1df65deef6dad2e9",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "649b06bb30864aa08f0e2e6da8b5195a46113666e5c28766c9dcb19687f8c5a5",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "ac8f345309b5e93557da938438bf90155f37dcb59af79a02fd4131b8f839ec52",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "2232861150c2cb2ca3dc2c4e7dc8a25d",
+              "leaf": "91e7da1a50c90cfea16404c1d3dfda04b07f3851fef0445c0302f97a03755841"
+            }
+          }
+        }
+      },
+      {
+        "cycle": 5,
+        "pairings": [
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "bye": null,
+        "plays": {
+          "0": {
+            "commit": "cf43649ac4f69489144a7c67770c3408c87e462255da30c1abf87839ee03aa2d",
+            "reveal": {
+              "card": "rock",
+              "index": 4,
+              "salt": "20704e9155b902f1b200e721873b563a",
+              "proof": [
+                {
+                  "hash": "78b02420a23b902389717bbb2f46a17b6b0efe181acc06db23b807cd0505e388",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "726286cf424b155d946df00c796f5e51b8698d1bbc90338a062f292666c4aa86",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "212c7aad27e8f258cd64685932a6183f",
+              "leaf": "1c0351c66544c67e98fd18f1f63dff71ebad5ac8e9ac4f4622822af0edba1327"
+            }
+          },
+          "1": {
+            "commit": "5a4d86a20d80e91465dcf07eef62e1b49d58e651ee47ef443f31ed5c9c8efd09",
+            "reveal": {
+              "card": "rock",
+              "index": 3,
+              "salt": "15c37b37e248fb1aa025012e2fb1e283",
+              "proof": [
+                {
+                  "hash": "ac3b6429e7572d16499da4efaef6844c962bbc173e4fc764b86c7aca5a91797c",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "eb6ec71ceda484c08afeec88c3b737addbe1f30b380f99b3b991594056dd94f9",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "5bafc198552e2a8f3bf2f08b43e37035708741227779e62ac5fdcb3fb82db240",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "67ea740d7804d6416eef930e6787b403",
+              "leaf": "d25cc9183a5f3f7e81247a72cc69ca737f804585ee2db6940f93e3adac8d5ad7"
+            }
+          },
+          "2": {
+            "commit": "10f04f422e886af2eb34eecdeb6f4dacb09af48e66ce3ba08c0b4520059b011f",
+            "reveal": {
+              "card": "paper",
+              "index": 5,
+              "salt": "5cbda08fa3317932e6178429a26b7be0",
+              "proof": [
+                {
+                  "hash": "ddd108ef76b2a8a1a08f83382320c9adf73bfb8d5fcfac38360af3f4a916acb8",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "fc09b480be95008676e0605644c749cc3306e0577a8879fed57ec664e9df04b0",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "78d73b332f278cec0b8969bbd7c6b19e",
+              "leaf": "758a78267f2ab1497c067370facc15ed24a432e2bc2a01ee21ee73d6ff6283d0"
+            }
+          },
+          "3": {
+            "commit": "9b56edc4c5f2706d46296da965572c02ed84fb79b7bea8b27709ba6fbfbfee52",
+            "reveal": {
+              "card": "paper",
+              "index": 5,
+              "salt": "1a104018f3636598c74d8bb9d05f03ff",
+              "proof": [
+                {
+                  "hash": "ae482957ad7dae5127ecebf9073ab45109b4b0512ab4e9cc193d6b51ee45ec83",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "29ca678b60e3d1b7d9fa1924948dc23eab5ebd12b06399ae38946c794bfc129b",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "21ef3c9c93d1f240a696ab54f7b241cc",
+              "leaf": "1672d49a3bc3dd3d66cab5ea351cefe0db55259f3863ed9a9f3b987120be03d3"
+            }
+          }
+        }
+      },
+      {
+        "cycle": 6,
+        "pairings": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "bye": null,
+        "plays": {
+          "0": {
+            "commit": "f4cf5144b116bbcbc6b700bd09b838f36d619bbf9d3845af2b388b79a4b3844c",
+            "reveal": {
+              "card": "paper",
+              "index": 5,
+              "salt": "dc9a7156093b225cc185b9a55ff62597",
+              "proof": [
+                {
+                  "hash": "1c0351c66544c67e98fd18f1f63dff71ebad5ac8e9ac4f4622822af0edba1327",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "726286cf424b155d946df00c796f5e51b8698d1bbc90338a062f292666c4aa86",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "c289e10ceb7c70a0b9ff1295370f2351",
+              "leaf": "78b02420a23b902389717bbb2f46a17b6b0efe181acc06db23b807cd0505e388"
+            }
+          },
+          "1": {
+            "commit": "c40f8a5aa41350dd623d672cdc75b27538892b18893e399b02dc5b6e2e738429",
+            "reveal": {
+              "card": "paper",
+              "index": 4,
+              "salt": "35ad50caaddf70eedb4d0025c2861cdb",
+              "proof": [
+                {
+                  "hash": "404502525003434130c91afb04cb4bce28e72c83dc1329681fe562de1d563aaa",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "895c10f64ad3ba18d0322b1725fbf1d1cba8ca322fa3de6cc1c3d596272685f2",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "f454bade8a136471d5a4ab36b26bc62f",
+              "leaf": "9edd39e650f0ab8a352bb330a95c113cbe4c130f57c8c25355c527b92f732a7e"
+            }
+          },
+          "2": {
+            "commit": "2a77fef77e1a440285fee1f7b2ce53388a547a697d342bd2b868da82861cc201",
+            "reveal": {
+              "card": "scissors",
+              "index": 3,
+              "salt": "317cfa2c6ed652ac51a850e2874ab858",
+              "proof": [
+                {
+                  "hash": "c94de44e5efe0a33f5e3507319b4f5aaaa0295633b10e44aadadaca1ab4ce2ee",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "050c57ab752f5adb0baa61c0bc1144dcd13ec76f8d728b725480130cab93f1f7",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "29c5e06cf3c5d41db2c02b341442752ed0ace5e5b7d72b52e374afa701b8e004",
+                  "siblingIsLeft": false
+                }
+              ],
+              "playSalt": "706fa701112a16530124f1ecb0460af6",
+              "leaf": "5b1731b55047010b92cff84c796a2e005087288cfb08eed815f6a289198a7727"
+            }
+          },
+          "3": {
+            "commit": "ac8b43095e05c51986aa3f3c34239f981c3070057b7b8ec0f16691fa85f54646",
+            "reveal": {
+              "card": "rock",
+              "index": 4,
+              "salt": "de4d6ddd4797d52ac92bd0fcf58708b5",
+              "proof": [
+                {
+                  "hash": "1672d49a3bc3dd3d66cab5ea351cefe0db55259f3863ed9a9f3b987120be03d3",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "29ca678b60e3d1b7d9fa1924948dc23eab5ebd12b06399ae38946c794bfc129b",
+                  "siblingIsLeft": true
+                }
+              ],
+              "playSalt": "e30e398b11fef2461864fcbc31dec197",
+              "leaf": "ae482957ad7dae5127ecebf9073ab45109b4b0512ab4e9cc193d6b51ee45ec83"
+            }
+          }
+        }
+      }
+    ],
+    "seats": [
+      {
+        "seat": 0,
+        "handle": "PASSENGER / RUST",
+        "isBot": false,
+        "replacedByHouse": false,
+        "starsStart": 3,
+        "starsEnd": 5,
+        "chipsStart": 40,
+        "chipsEnd": 25,
+        "debtEnd": 0,
+        "alive": true,
+        "eliminatedCycle": null,
+        "act1HandRoot": "88dd19b9c8b571fa055d300c50bfcb2867913c247ebcff25ab809b270c8b7d2a",
+        "act1HandCommit": "042f4dcb48e207580b42246fdfc644dd6036c2d748f31fde5b0e8114ee398ee6",
+        "act1HandReveal": {
+          "cards": [
+            "scissors",
+            "paper",
+            "rock",
+            "scissors",
+            "rock",
+            "paper"
+          ],
+          "salts": [
+            "103f83a9243eeb6a0e690b2c808e2c2c",
+            "f550c64b24ab8c64417cf400151990f1",
+            "21b67f4dab54b04a1db688d33a8a5809",
+            "991d9251c3052f72d1f8f1415f780bc3",
+            "20704e9155b902f1b200e721873b563a",
+            "dc9a7156093b225cc185b9a55ff62597"
+          ]
+        },
+        "act1UsedLeaves": [
+          "c67a0fa13ff12050783dd56a5736b2ab7697abfc439a653f53f848284ac2c7c5",
+          "48810eff8aa870fa8299e444fc8b7734861148380c7d121571cee37ab1278a53",
+          "b777a1f9b5c9c79e2f86790e344d02d2f34dd07994b6fad73eed09f164365061",
+          "3b9a7ed153897005d988cac7b9355b384a9f46f8268f5be24eff2a1d9f390c95",
+          "1c0351c66544c67e98fd18f1f63dff71ebad5ac8e9ac4f4622822af0edba1327",
+          "78b02420a23b902389717bbb2f46a17b6b0efe181acc06db23b807cd0505e388"
+        ],
+        "cardsLeft": 0,
+        "loanTaken": false,
+        "history": {
+          "offers": [
+            {
+              "id": "a7572d7884d8c4b94530f79d",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 1,
+              "status": "open",
+              "createdAt": 1792538785157,
+              "expiresAt": 1792538786236
+            },
+            {
+              "id": "62037e37c02870d876a0879d",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 2,
+              "status": "open",
+              "createdAt": 1792538786889,
+              "expiresAt": 1792538787968
+            },
+            {
+              "id": "4cc1488da167692088d85c05",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 3,
+              "status": "open",
+              "createdAt": 1792538788658,
+              "expiresAt": 1792538789737
+            }
+          ],
+          "trades": [
+            {
+              "offerId": "a7572d7884d8c4b94530f79d",
+              "direction": "sent",
+              "id": "a7572d7884d8c4b94530f79d",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 1,
+              "status": "accepted",
+              "createdAt": 1792538785157,
+              "expiresAt": 1792538786236,
+              "closedAt": 1792538785242
+            },
+            {
+              "offerId": "62037e37c02870d876a0879d",
+              "direction": "sent",
+              "id": "62037e37c02870d876a0879d",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 2,
+              "status": "accepted",
+              "createdAt": 1792538786889,
+              "expiresAt": 1792538787968,
+              "closedAt": 1792538786980
+            },
+            {
+              "offerId": "4cc1488da167692088d85c05",
+              "direction": "sent",
+              "id": "4cc1488da167692088d85c05",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 3,
+              "status": "accepted",
+              "createdAt": 1792538788658,
+              "expiresAt": 1792538789737,
+              "closedAt": 1792538788812
+            }
+          ],
+          "loans": [],
+          "dealer": []
+        }
+      },
+      {
+        "seat": 1,
+        "handle": "HOUSE / NAIL",
+        "isBot": true,
+        "replacedByHouse": false,
+        "starsStart": 3,
+        "starsEnd": 3,
+        "chipsStart": 40,
+        "chipsEnd": 55,
+        "debtEnd": 0,
+        "alive": true,
+        "eliminatedCycle": null,
+        "act1HandRoot": "dc612fe1bd4e260a6e5e5cdccab24ecd2d5364a923b8849a7748b7d675ca6696",
+        "act1HandCommit": "d2adef479c5198e96e1f121068752fc7242e175c4c5a7fe063e99b08ed8c8a34",
+        "act1HandReveal": {
+          "cards": [
+            "paper",
+            "rock",
+            "scissors",
+            "rock",
+            "paper",
+            "scissors"
+          ],
+          "salts": [
+            "70adccb0e159bda483be1514f21bb59a",
+            "0c38b20587048e7c9c2c27162195a685",
+            "b363858a3b7a6ced6097115ea5e2a8b5",
+            "15c37b37e248fb1aa025012e2fb1e283",
+            "35ad50caaddf70eedb4d0025c2861cdb",
+            "2a80b987877be2630d37e95fa0ed0353"
+          ]
+        },
+        "act1UsedLeaves": [
+          "404502525003434130c91afb04cb4bce28e72c83dc1329681fe562de1d563aaa",
+          "953426682c3a1760907a770afb3573338ad0fa19945c40c8e352ce9fc88f15f5",
+          "70f9717f59b348da98df8d208fe75884ce7b84a90160ef0a065aa9f85c9596d8",
+          "ac3b6429e7572d16499da4efaef6844c962bbc173e4fc764b86c7aca5a91797c",
+          "d25cc9183a5f3f7e81247a72cc69ca737f804585ee2db6940f93e3adac8d5ad7",
+          "9edd39e650f0ab8a352bb330a95c113cbe4c130f57c8c25355c527b92f732a7e"
+        ],
+        "cardsLeft": 0,
+        "loanTaken": false,
+        "history": {
+          "offers": [
+            {
+              "id": "19b5cdaebab97bdbfa23f2f8",
+              "from": 1,
+              "to": 3,
+              "give": {
+                "stars": 0,
+                "chips": 20
+              },
+              "want": {
+                "stars": 0,
+                "chips": 25
+              },
+              "cycle": 1,
+              "status": "open",
+              "createdAt": 1792538785376,
+              "expiresAt": 1792538786236
+            },
+            {
+              "id": "5df4ce064b2edb8a60da3d59",
+              "from": 1,
+              "to": 0,
+              "give": {
+                "stars": 0,
+                "chips": 20
+              },
+              "want": {
+                "stars": 0,
+                "chips": 25
+              },
+              "cycle": 3,
+              "status": "open",
+              "createdAt": 1792538788778,
+              "expiresAt": 1792538789737
+            }
+          ],
+          "trades": [
+            {
+              "offerId": "a7572d7884d8c4b94530f79d",
+              "direction": "received",
+              "id": "a7572d7884d8c4b94530f79d",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 1,
+              "status": "accepted",
+              "createdAt": 1792538785157,
+              "expiresAt": 1792538786236,
+              "closedAt": 1792538785242
+            },
+            {
+              "offerId": "62037e37c02870d876a0879d",
+              "direction": "received",
+              "id": "62037e37c02870d876a0879d",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 2,
+              "status": "accepted",
+              "createdAt": 1792538786889,
+              "expiresAt": 1792538787968,
+              "closedAt": 1792538786980
+            },
+            {
+              "offerId": "4cc1488da167692088d85c05",
+              "direction": "received",
+              "id": "4cc1488da167692088d85c05",
+              "from": 0,
+              "to": 1,
+              "give": {
+                "stars": 0,
+                "chips": 5
+              },
+              "want": {
+                "stars": 0,
+                "chips": 0
+              },
+              "cycle": 3,
+              "status": "accepted",
+              "createdAt": 1792538788658,
+              "expiresAt": 1792538789737,
+              "closedAt": 1792538788812
+            }
+          ],
+          "loans": [],
+          "dealer": []
+        }
+      },
+      {
+        "seat": 2,
+        "handle": "HOUSE / ZINC",
+        "isBot": true,
+        "replacedByHouse": false,
+        "starsStart": 3,
+        "starsEnd": 4,
+        "chipsStart": 40,
+        "chipsEnd": 40,
+        "debtEnd": 0,
+        "alive": true,
+        "eliminatedCycle": null,
+        "act1HandRoot": "13f108c98a582f2f4aa778b5d20c8030f631d8ab3b06f1596a9def0de226a656",
+        "act1HandCommit": "89427019b2f8ebfe5e9c066b74f4c705426957f59774794d05d7be2dcf847890",
+        "act1HandReveal": {
+          "cards": [
+            "scissors",
+            "rock",
+            "rock",
+            "scissors",
+            "paper",
+            "paper"
+          ],
+          "salts": [
+            "92f4f44b4c6dabca968b9c27a17818b2",
+            "a743a9e5b292c01db333f040d7a8506d",
+            "82474c22629ed487194075b6d56078fe",
+            "317cfa2c6ed652ac51a850e2874ab858",
+            "710ac4796b67be29771b14924f89bfc7",
+            "5cbda08fa3317932e6178429a26b7be0"
+          ]
+        },
+        "act1UsedLeaves": [
+          "c94de44e5efe0a33f5e3507319b4f5aaaa0295633b10e44aadadaca1ab4ce2ee",
+          "ddd108ef76b2a8a1a08f83382320c9adf73bfb8d5fcfac38360af3f4a916acb8",
+          "ac0234779d15981d4797dd6d8c697f2406250a6c415180f22d7bd8cf35666b11",
+          "081423f440873cbff6d91625a3fc398a202a0f8002db88d87cd9683930105ad2",
+          "758a78267f2ab1497c067370facc15ed24a432e2bc2a01ee21ee73d6ff6283d0",
+          "5b1731b55047010b92cff84c796a2e005087288cfb08eed815f6a289198a7727"
+        ],
+        "cardsLeft": 0,
+        "loanTaken": false,
+        "history": {
+          "offers": [
+            {
+              "id": "8732a193e4d0b8ac7a3c177b",
+              "from": 2,
+              "to": 0,
+              "give": {
+                "stars": 0,
+                "chips": 20
+              },
+              "want": {
+                "stars": 0,
+                "chips": 25
+              },
+              "cycle": 2,
+              "status": "open",
+              "createdAt": 1792538787036,
+              "expiresAt": 1792538787968
+            },
+            {
+              "id": "6ba83a452ad106c2b43dd9e5",
+              "from": 2,
+              "to": 0,
+              "give": {
+                "stars": 0,
+                "chips": 20
+              },
+              "want": {
+                "stars": 0,
+                "chips": 25
+              },
+              "cycle": 5,
+              "status": "open",
+              "createdAt": 1792538792227,
+              "expiresAt": 1792538793201
+            }
+          ],
+          "trades": [],
+          "loans": [],
+          "dealer": []
+        }
+      },
+      {
+        "seat": 3,
+        "handle": "HOUSE / DRIFT",
+        "isBot": true,
+        "replacedByHouse": false,
+        "starsStart": 3,
+        "starsEnd": 1,
+        "chipsStart": 40,
+        "chipsEnd": 30,
+        "debtEnd": 64,
+        "alive": false,
+        "eliminatedCycle": 7,
+        "act1HandRoot": "c6293831f7f13c9ec464affde05a67d45ff079a5f7805e7b240723580d2b6602",
+        "act1HandCommit": "3159db39f4d2aee2cc68508519e778c66594adbe6f799ba690d5f6092bcaaeea",
+        "act1HandReveal": {
+          "cards": [
+            "scissors",
+            "scissors",
+            "paper",
+            "rock",
+            "rock",
+            "paper"
+          ],
+          "salts": [
+            "ae55059b9a7261489af1c5fbe52f748d",
+            "40ecea6fc53e8353d08ec801b312af66",
+            "77e3962c6c2269fd186ac4aa70277392",
+            "f68512a0a29bcc3c5de05cc70dabd56e",
+            "de4d6ddd4797d52ac92bd0fcf58708b5",
+            "1a104018f3636598c74d8bb9d05f03ff"
+          ]
+        },
+        "act1UsedLeaves": [
+          "d8e4c64ed4172fff7f6fd4594ce906bd9db88b8b21dd8e666dc9004df0d667c0",
+          "cb877e6960702e305ed36560609f65beec14253d2da0507b1df65deef6dad2e9",
+          "8b5faa7331fa3f1d77ee3a03a4f66093cff65a8088b57b0f3711a18854fd6555",
+          "91e7da1a50c90cfea16404c1d3dfda04b07f3851fef0445c0302f97a03755841",
+          "1672d49a3bc3dd3d66cab5ea351cefe0db55259f3863ed9a9f3b987120be03d3",
+          "ae482957ad7dae5127ecebf9073ab45109b4b0512ab4e9cc193d6b51ee45ec83"
+        ],
+        "cardsLeft": 0,
+        "loanTaken": true,
+        "history": {
+          "offers": [],
+          "trades": [],
+          "loans": [
+            {
+              "cycle": 4,
+              "principal": 40,
+              "repay": 64,
+              "chips": 80
+            }
+          ],
+          "dealer": [
+            {
+              "op": "sell_star",
+              "cycle": 5,
+              "stars": 2,
+              "chips": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "finale": {
+    "a": 0,
+    "b": 2,
+    "house": false,
+    "roles": {
+      "a": "crown",
+      "b": "rebel"
+    },
+    "chips": {
+      "a": 105,
+      "b": 95
+    },
+    "rounds": [
+      {
+        "round": 1,
+        "cards": {
+          "a": "crown",
+          "b": "citizen"
+        },
+        "bets": {
+          "a": 5,
+          "b": 0
+        },
+        "outcome": "a",
+        "transfer": 0,
+        "multiplier": 1,
+        "chipsAfter": {
+          "a": 100,
+          "b": 100
+        },
+        "plays": {
+          "a": {
+            "commit": "d4f4d621c470830af5312995f0de7d7da6d693fa768cce0fe92620b8716013ba",
+            "reveal": {
+              "card": "crown",
+              "index": 0,
+              "salt": "472ce387b8bde705334980a2b165fb82",
+              "proof": [
+                {
+                  "hash": "9091004574835d1a5b9134fb953f7eca634cba302850f661d6fc15f01c345642",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "6d547b53b7fbf34a88cad40077ff73e4025c5e45a9da36fbae4a5fb7944f79e8",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "4d0efeecdaf4c02c6535c065d76856682d983836a6c7aa73c0e38f798a76bd78",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 5,
+              "playSalt": "c250d92cdc7ccd9f69bf5ccab027b3d0",
+              "leaf": "09223f697f5c3a770ff9967f52e1e90a168eacda16f3870fc6eef940a8f0c435"
+            }
+          },
+          "b": {
+            "commit": "48e53d0b44341d4f752685e0d1bbf7c3c68f9e3acd0a7ff61fef24f39b285efe",
+            "reveal": {
+              "card": "citizen",
+              "index": 4,
+              "salt": "dee3e6912dcc7030b9d2c1defc0eb58c",
+              "proof": [
+                {
+                  "hash": "95dd4be4c9e6089c714af5b926d1187dddd9ae82d115135b095b5c0b31313318",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "b99801032bb530b8728e894c3f946e878e8a9203576417b52df0ecab5a1dad99",
+                  "siblingIsLeft": true
+                }
+              ],
+              "bet": 0,
+              "playSalt": "512b6e76fda47456fd583436c0005194",
+              "leaf": "e992e904cbd7b83e4afcfd41601c62cba7056928d8d822dba57307404df85085"
+            }
+          }
+        }
+      },
+      {
+        "round": 2,
+        "cards": {
+          "a": "citizen",
+          "b": "citizen"
+        },
+        "bets": {
+          "a": 5,
+          "b": 0
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "multiplier": 1,
+        "chipsAfter": {
+          "a": 100,
+          "b": 100
+        },
+        "plays": {
+          "a": {
+            "commit": "2a23a6ed5f821a76c349601d9a83988e73bf0d80aa1f74c448b32e527e22567f",
+            "reveal": {
+              "card": "citizen",
+              "index": 1,
+              "salt": "55db9d6a29ad9d194688470415f4c64a",
+              "proof": [
+                {
+                  "hash": "09223f697f5c3a770ff9967f52e1e90a168eacda16f3870fc6eef940a8f0c435",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "6d547b53b7fbf34a88cad40077ff73e4025c5e45a9da36fbae4a5fb7944f79e8",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "4d0efeecdaf4c02c6535c065d76856682d983836a6c7aa73c0e38f798a76bd78",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 5,
+              "playSalt": "48426a2995de493bb351470e977135a1",
+              "leaf": "9091004574835d1a5b9134fb953f7eca634cba302850f661d6fc15f01c345642"
+            }
+          },
+          "b": {
+            "commit": "97d3b8367b2dba37b89e959e7e1baa0c76b82a4304bed72361a0b653145884b3",
+            "reveal": {
+              "card": "citizen",
+              "index": 1,
+              "salt": "5517a3a3d0da1936b52dd99c7fe5354f",
+              "proof": [
+                {
+                  "hash": "3ec2499cfa32e4e36dc280df067e81bf680c4d62030dbb3bfaab1768d8cf5038",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "cda948c95a9c18e3ff718252423b99bb93eba1c2e02d2ade74a44c8330acbb7b",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "3804542e88f508b3824ae9e304c5e3564c8eeacd7d7c759a138fe825ede95e08",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 0,
+              "playSalt": "1f579d42aab47fb63d7588e844c871b9",
+              "leaf": "f290838c4ff902497f6d69c4dce8baa040190c6c65f84011770d0986d61b0827"
+            }
+          }
+        }
+      },
+      {
+        "round": 3,
+        "cards": {
+          "a": "citizen",
+          "b": "rebel"
+        },
+        "bets": {
+          "a": 5,
+          "b": 6
+        },
+        "outcome": "a",
+        "transfer": 5,
+        "multiplier": 1,
+        "chipsAfter": {
+          "a": 105,
+          "b": 95
+        },
+        "plays": {
+          "a": {
+            "commit": "e1fd86ae249a27e5f0ecae7652d84e4d5049aee6bea56c644d4869c54ba36aeb",
+            "reveal": {
+              "card": "citizen",
+              "index": 2,
+              "salt": "b2c3ed700f19c7afe8c6639a53988196",
+              "proof": [
+                {
+                  "hash": "83b51790391525a9411eb4eeaa296519822c74a56c2739c3a787c1b52db2ecd7",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "35aed77cf420eea48a98a2313735945572afb2f8744927268dede8fe57a821ca",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "4d0efeecdaf4c02c6535c065d76856682d983836a6c7aa73c0e38f798a76bd78",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 5,
+              "playSalt": "b7844aa413464f881d0eed32dd6df7ce",
+              "leaf": "0f10683fdbd1334a0c857d35681d43024425b195b9d4ed1505f0cbc65ab77b39"
+            }
+          },
+          "b": {
+            "commit": "cd1a09d47092407bad375eaca0a9590eede1ed6b68f3e0ada09ae87d4606cf45",
+            "reveal": {
+              "card": "rebel",
+              "index": 0,
+              "salt": "6c4d903229cb1c28ded57831e42c23a0",
+              "proof": [
+                {
+                  "hash": "f290838c4ff902497f6d69c4dce8baa040190c6c65f84011770d0986d61b0827",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "cda948c95a9c18e3ff718252423b99bb93eba1c2e02d2ade74a44c8330acbb7b",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "3804542e88f508b3824ae9e304c5e3564c8eeacd7d7c759a138fe825ede95e08",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 6,
+              "playSalt": "a11ebcc75e923e173a660c44d2211b87",
+              "leaf": "3ec2499cfa32e4e36dc280df067e81bf680c4d62030dbb3bfaab1768d8cf5038"
+            }
+          }
+        }
+      },
+      {
+        "round": 4,
+        "cards": {
+          "a": "citizen",
+          "b": "citizen"
+        },
+        "bets": {
+          "a": 5,
+          "b": 0
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "multiplier": 1,
+        "chipsAfter": {
+          "a": 105,
+          "b": 95
+        },
+        "plays": {
+          "a": {
+            "commit": "99c5cf09d713f86fbd89d3cc7cd551b3b4457bca7dea931d72b23bae70d7ac45",
+            "reveal": {
+              "card": "citizen",
+              "index": 3,
+              "salt": "25486fb0a32087cc78ec839bcdf5ba24",
+              "proof": [
+                {
+                  "hash": "0f10683fdbd1334a0c857d35681d43024425b195b9d4ed1505f0cbc65ab77b39",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "35aed77cf420eea48a98a2313735945572afb2f8744927268dede8fe57a821ca",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "4d0efeecdaf4c02c6535c065d76856682d983836a6c7aa73c0e38f798a76bd78",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 5,
+              "playSalt": "7eb5af4329b7b67384ebabaff1aa4db2",
+              "leaf": "83b51790391525a9411eb4eeaa296519822c74a56c2739c3a787c1b52db2ecd7"
+            }
+          },
+          "b": {
+            "commit": "fa0f52d3b2915c25140ba33bf131b973eb098a3de804378182898842aa2b1381",
+            "reveal": {
+              "card": "citizen",
+              "index": 3,
+              "salt": "f174b3c89680ae6d38cb9f0f020f0bc3",
+              "proof": [
+                {
+                  "hash": "9cc27eaec0efc56c65f52b9df0f142607e44947059d41caab76157873b56471c",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "a69baeae7ae590e2ca728a68fb9bb5bed8b67b1c1f3cef23a63baf2a39e6891e",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "3804542e88f508b3824ae9e304c5e3564c8eeacd7d7c759a138fe825ede95e08",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 0,
+              "playSalt": "087a016e1b88acaf43f6c5d84c4abfbb",
+              "leaf": "1bc861d94b7082eada84d718212036747fef46ccb1bcf2de4a62919399e6c384"
+            }
+          }
+        }
+      },
+      {
+        "round": 5,
+        "cards": {
+          "a": "citizen",
+          "b": "citizen"
+        },
+        "bets": {
+          "a": 5,
+          "b": 14
+        },
+        "outcome": "tie",
+        "transfer": 0,
+        "multiplier": 1,
+        "chipsAfter": {
+          "a": 105,
+          "b": 95
+        },
+        "plays": {
+          "a": {
+            "commit": "a37a4a36e452da7410b0ffcadeec2875d53a5bb3d48932ba9bf328859195b5cd",
+            "reveal": {
+              "card": "citizen",
+              "index": 4,
+              "salt": "5f452e3e59c6ee0cb0e8c98deba9c067",
+              "proof": [
+                {
+                  "hash": "95dd4be4c9e6089c714af5b926d1187dddd9ae82d115135b095b5c0b31313318",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a6a981bcb154204b19547cba393c484f5807e4c65ec23a5743e8269471dea799",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "9fcb8aad196a5817a8cfd845b0f4513f924df1fa06ad0a3f57f99dfb9c995567",
+                  "siblingIsLeft": true
+                }
+              ],
+              "bet": 5,
+              "playSalt": "bd0a8bc128ec163f21df76f2b40c0e1d",
+              "leaf": "89bbcda9e8fbce32b3c62597c0174ee45e3c912d4e482d9d39cd59a36b8fc68f"
+            }
+          },
+          "b": {
+            "commit": "2eba8de1352cb574b0e5478ea43191363d7b6adf659fff2d451299a9e66c598e",
+            "reveal": {
+              "card": "citizen",
+              "index": 2,
+              "salt": "0f36a3c7f199653f4a6693426a991ea9",
+              "proof": [
+                {
+                  "hash": "1bc861d94b7082eada84d718212036747fef46ccb1bcf2de4a62919399e6c384",
+                  "siblingIsLeft": false
+                },
+                {
+                  "hash": "a69baeae7ae590e2ca728a68fb9bb5bed8b67b1c1f3cef23a63baf2a39e6891e",
+                  "siblingIsLeft": true
+                },
+                {
+                  "hash": "3804542e88f508b3824ae9e304c5e3564c8eeacd7d7c759a138fe825ede95e08",
+                  "siblingIsLeft": false
+                }
+              ],
+              "bet": 14,
+              "playSalt": "0d685653d8fbbb59a05b227b50858967",
+              "leaf": "9cc27eaec0efc56c65f52b9df0f142607e44947059d41caab76157873b56471c"
+            }
+          }
+        }
+      }
+    ],
+    "winner": "a",
+    "winnerSeat": 0,
+    "split": false,
+    "forfeit": null,
+    "hands": [
+      {
+        "side": "a",
+        "seat": 0,
+        "role": "crown",
+        "root": "157efd497d4e3792004b12f1f1f69653c1d3d6e4c3402953e3dab6ffda9dc655",
+        "commit": "6b0c30c07f3a7673089324c5f6f1d08a4734e759ff3df6fd7acd1ffa800df37b",
+        "reveal": {
+          "cards": [
+            "crown",
+            "citizen",
+            "citizen",
+            "citizen",
+            "citizen"
+          ],
+          "salts": [
+            "472ce387b8bde705334980a2b165fb82",
+            "55db9d6a29ad9d194688470415f4c64a",
+            "b2c3ed700f19c7afe8c6639a53988196",
+            "25486fb0a32087cc78ec839bcdf5ba24",
+            "5f452e3e59c6ee0cb0e8c98deba9c067"
+          ]
+        }
+      },
+      {
+        "side": "b",
+        "seat": 2,
+        "role": "rebel",
+        "root": "21aeb2e9e4895caa33cab04615f8fb72a37a7681d8006672dbe88885dd5cd51e",
+        "commit": "949d6f05eec7be967e082ae1822252b9615638af00fdca3f251c8efddb2d4a4e",
+        "reveal": {
+          "cards": [
+            "rebel",
+            "citizen",
+            "citizen",
+            "citizen",
+            "citizen"
+          ],
+          "salts": [
+            "6c4d903229cb1c28ded57831e42c23a0",
+            "5517a3a3d0da1936b52dd99c7fe5354f",
+            "0f36a3c7f199653f4a6693426a991ea9",
+            "f174b3c89680ae6d38cb9f0f020f0bc3",
+            "dee3e6912dcc7030b9d2c1defc0eb58c"
+          ]
+        }
+      }
+    ]
+  },
+  "settlement": {
+    "winnerSeat": 0,
+    "split": false,
+    "houseWon": false,
+    "forfeit": null,
+    "stakeZats": 0,
+    "payoutZats": 0,
+    "status": "none",
+    "txid": null,
+    "settledAt": 1792538797279
+  },
+  "complete": true,
+  "log": [
+    {
+      "seq": 1,
+      "t": 0,
+      "kind": "intercom",
+      "text": "THE DERELICT // VOYAGE 0041 // NO PORT OF CALL"
+    },
+    {
+      "seq": 2,
+      "t": 0,
+      "kind": "intercom",
+      "text": "Doors sealed. The table is live."
+    },
+    {
+      "seq": 3,
+      "t": 0,
+      "kind": "system",
+      "text": "ACT I — THE HOLD. Four seats. Three stars. One exit."
+    },
+    {
+      "seq": 4,
+      "t": 15,
+      "kind": "system",
+      "text": "SEAT 01 is at the table."
+    },
+    {
+      "seq": 5,
+      "t": 36,
+      "kind": "system",
+      "text": "CYCLE 1 — THE TABLE OPENS."
+    },
+    {
+      "seq": 6,
+      "t": 37,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 7,
+      "t": 38,
+      "kind": "taunt",
+      "text": "I can hear your cards from here.",
+      "seat": 0,
+      "taunt": 1
+    },
+    {
+      "seq": 8,
+      "t": 122,
+      "kind": "system",
+      "text": "A deal was struck in the dark."
+    },
+    {
+      "seq": 9,
+      "t": 256,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 10,
+      "t": 319,
+      "kind": "system",
+      "text": "A sealed offer was refused."
+    },
+    {
+      "seq": 11,
+      "t": 1116,
+      "kind": "system",
+      "text": "CHALLENGE. Name a seat, or the deck names one for you."
+    },
+    {
+      "seq": 12,
+      "t": 1285,
+      "kind": "system",
+      "text": "PAIRS: SEAT 01 vs SEAT 02 · SEAT 03 vs SEAT 04"
+    },
+    {
+      "seq": 13,
+      "t": 1286,
+      "kind": "system",
+      "text": "CARDS DOWN. The hold goes quiet."
+    },
+    {
+      "seq": 14,
+      "t": 1396,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 15,
+      "t": 1466,
+      "kind": "resolve",
+      "text": "SEAT 01 shows SCISSORS · SEAT 02 shows SCISSORS. Neither star moves.",
+      "pair": [
+        0,
+        1
+      ],
+      "cards": {
+        "a": "scissors",
+        "b": "scissors"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 16,
+      "t": 1466,
+      "kind": "resolve",
+      "text": "SEAT 03 shows ROCK · SEAT 04 shows SCISSORS. Star to SEAT 03.",
+      "pair": [
+        2,
+        3
+      ],
+      "cards": {
+        "a": "rock",
+        "b": "scissors"
+      },
+      "outcome": "a",
+      "transfer": 1
+    },
+    {
+      "seq": 17,
+      "t": 1466,
+      "kind": "system",
+      "text": "THE HOLD SETTLES."
+    },
+    {
+      "seq": 18,
+      "t": 1769,
+      "kind": "system",
+      "text": "CYCLE 2 — THE TABLE OPENS."
+    },
+    {
+      "seq": 19,
+      "t": 1769,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 20,
+      "t": 1769,
+      "kind": "taunt",
+      "text": "I can hear your cards from here.",
+      "seat": 0,
+      "taunt": 1
+    },
+    {
+      "seq": 21,
+      "t": 1860,
+      "kind": "system",
+      "text": "A deal was struck in the dark."
+    },
+    {
+      "seq": 22,
+      "t": 1916,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 23,
+      "t": 2849,
+      "kind": "system",
+      "text": "CHALLENGE. Name a seat, or the deck names one for you."
+    },
+    {
+      "seq": 24,
+      "t": 3039,
+      "kind": "system",
+      "text": "PAIRS: SEAT 02 vs SEAT 04 · SEAT 01 vs SEAT 03"
+    },
+    {
+      "seq": 25,
+      "t": 3039,
+      "kind": "system",
+      "text": "CARDS DOWN. The hold goes quiet."
+    },
+    {
+      "seq": 26,
+      "t": 3168,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 27,
+      "t": 3237,
+      "kind": "resolve",
+      "text": "SEAT 02 shows PAPER · SEAT 04 shows PAPER. Neither star moves.",
+      "pair": [
+        1,
+        3
+      ],
+      "cards": {
+        "a": "paper",
+        "b": "paper"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 28,
+      "t": 3237,
+      "kind": "resolve",
+      "text": "SEAT 01 shows PAPER · SEAT 03 shows PAPER. Neither star moves.",
+      "pair": [
+        0,
+        2
+      ],
+      "cards": {
+        "a": "paper",
+        "b": "paper"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 29,
+      "t": 3237,
+      "kind": "system",
+      "text": "THE HOLD SETTLES."
+    },
+    {
+      "seq": 30,
+      "t": 3538,
+      "kind": "system",
+      "text": "CYCLE 3 — THE TABLE OPENS."
+    },
+    {
+      "seq": 31,
+      "t": 3538,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 32,
+      "t": 3539,
+      "kind": "taunt",
+      "text": "I can hear your cards from here.",
+      "seat": 0,
+      "taunt": 1
+    },
+    {
+      "seq": 33,
+      "t": 3658,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 34,
+      "t": 3692,
+      "kind": "system",
+      "text": "A deal was struck in the dark."
+    },
+    {
+      "seq": 35,
+      "t": 4619,
+      "kind": "system",
+      "text": "CHALLENGE. Name a seat, or the deck names one for you."
+    },
+    {
+      "seq": 36,
+      "t": 4797,
+      "kind": "system",
+      "text": "PAIRS: SEAT 01 vs SEAT 04 · SEAT 03 vs SEAT 02"
+    },
+    {
+      "seq": 37,
+      "t": 4798,
+      "kind": "system",
+      "text": "CARDS DOWN. The hold goes quiet."
+    },
+    {
+      "seq": 38,
+      "t": 4924,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 39,
+      "t": 4980,
+      "kind": "resolve",
+      "text": "SEAT 01 shows ROCK · SEAT 04 shows SCISSORS. Star to SEAT 01.",
+      "pair": [
+        0,
+        3
+      ],
+      "cards": {
+        "a": "rock",
+        "b": "scissors"
+      },
+      "outcome": "a",
+      "transfer": 1
+    },
+    {
+      "seq": 40,
+      "t": 4980,
+      "kind": "resolve",
+      "text": "SEAT 03 shows SCISSORS · SEAT 02 shows ROCK. Star to SEAT 02.",
+      "pair": [
+        2,
+        1
+      ],
+      "cards": {
+        "a": "scissors",
+        "b": "rock"
+      },
+      "outcome": "b",
+      "transfer": 1
+    },
+    {
+      "seq": 41,
+      "t": 4980,
+      "kind": "system",
+      "text": "THE HOLD SETTLES."
+    },
+    {
+      "seq": 42,
+      "t": 5281,
+      "kind": "system",
+      "text": "CYCLE 4 — THE TABLE OPENS."
+    },
+    {
+      "seq": 43,
+      "t": 5282,
+      "kind": "taunt",
+      "text": "I can hear your cards from here.",
+      "seat": 0,
+      "taunt": 1
+    },
+    {
+      "seq": 44,
+      "t": 5479,
+      "kind": "system",
+      "text": "SEAT 04 signed the note."
+    },
+    {
+      "seq": 45,
+      "t": 6362,
+      "kind": "system",
+      "text": "CHALLENGE. Name a seat, or the deck names one for you."
+    },
+    {
+      "seq": 46,
+      "t": 6532,
+      "kind": "system",
+      "text": "PAIRS: SEAT 03 vs SEAT 04 · SEAT 01 vs SEAT 02"
+    },
+    {
+      "seq": 47,
+      "t": 6532,
+      "kind": "system",
+      "text": "CARDS DOWN. The hold goes quiet."
+    },
+    {
+      "seq": 48,
+      "t": 6656,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 49,
+      "t": 6701,
+      "kind": "resolve",
+      "text": "SEAT 03 shows ROCK · SEAT 04 shows ROCK. Neither star moves.",
+      "pair": [
+        2,
+        3
+      ],
+      "cards": {
+        "a": "rock",
+        "b": "rock"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 50,
+      "t": 6701,
+      "kind": "resolve",
+      "text": "SEAT 01 shows SCISSORS · SEAT 02 shows SCISSORS. Neither star moves.",
+      "pair": [
+        0,
+        1
+      ],
+      "cards": {
+        "a": "scissors",
+        "b": "scissors"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 51,
+      "t": 6701,
+      "kind": "system",
+      "text": "THE HOLD SETTLES."
+    },
+    {
+      "seq": 52,
+      "t": 7002,
+      "kind": "system",
+      "text": "CYCLE 5 — THE TABLE OPENS."
+    },
+    {
+      "seq": 53,
+      "t": 7002,
+      "kind": "taunt",
+      "text": "I can hear your cards from here.",
+      "seat": 0,
+      "taunt": 1
+    },
+    {
+      "seq": 54,
+      "t": 7107,
+      "kind": "system",
+      "text": "A sealed note changed hands."
+    },
+    {
+      "seq": 55,
+      "t": 7238,
+      "kind": "system",
+      "text": "SEAT 04 bought a star from the dealer."
+    },
+    {
+      "seq": 56,
+      "t": 8082,
+      "kind": "system",
+      "text": "CHALLENGE. Name a seat, or the deck names one for you."
+    },
+    {
+      "seq": 57,
+      "t": 8236,
+      "kind": "system",
+      "text": "PAIRS: SEAT 03 vs SEAT 04 · SEAT 01 vs SEAT 02"
+    },
+    {
+      "seq": 58,
+      "t": 8238,
+      "kind": "system",
+      "text": "CARDS DOWN. The hold goes quiet."
+    },
+    {
+      "seq": 59,
+      "t": 8314,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 60,
+      "t": 8378,
+      "kind": "resolve",
+      "text": "SEAT 03 shows PAPER · SEAT 04 shows PAPER. Neither star moves.",
+      "pair": [
+        2,
+        3
+      ],
+      "cards": {
+        "a": "paper",
+        "b": "paper"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 61,
+      "t": 8378,
+      "kind": "resolve",
+      "text": "SEAT 01 shows ROCK · SEAT 02 shows ROCK. Neither star moves.",
+      "pair": [
+        0,
+        1
+      ],
+      "cards": {
+        "a": "rock",
+        "b": "rock"
+      },
+      "outcome": "tie",
+      "transfer": 0
+    },
+    {
+      "seq": 62,
+      "t": 8378,
+      "kind": "system",
+      "text": "THE HOLD SETTLES."
+    },
+    {
+      "seq": 63,
+      "t": 8679,
+      "kind": "system",
+      "text": "CYCLE 6 — THE TABLE OPENS."
+    },
+    {
+      "seq": 64,
+      "t": 8679,
+      "kind": "taunt",
+      "text": "I can hear your cards from here.",
+      "seat": 0,
+      "taunt": 1
+    },
+    {
+      "seq": 65,
+      "t": 9760,
+      "kind": "system",
+      "text": "CHALLENGE. Name a seat, or the deck names one for you."
+    },
+    {
+      "seq": 66,
+      "t": 9922,
+      "kind": "system",
+      "text": "PAIRS: SEAT 02 vs SEAT 03 · SEAT 04 vs SEAT 01"
+    },
+    {
+      "seq": 67,
+      "t": 9923,
+      "kind": "system",
+      "text": "CARDS DOWN. The hold goes quiet."
+    },
+    {
+      "seq": 68,
+      "t": 10023,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 69,
+      "t": 10091,
+      "kind": "resolve",
+      "text": "SEAT 02 shows PAPER · SEAT 03 shows SCISSORS. Star to SEAT 03.",
+      "pair": [
+        1,
+        2
+      ],
+      "cards": {
+        "a": "paper",
+        "b": "scissors"
+      },
+      "outcome": "b",
+      "transfer": 1
+    },
+    {
+      "seq": 70,
+      "t": 10091,
+      "kind": "resolve",
+      "text": "SEAT 04 shows ROCK · SEAT 01 shows PAPER. Star to SEAT 01.",
+      "pair": [
+        3,
+        0
+      ],
+      "cards": {
+        "a": "rock",
+        "b": "paper"
+      },
+      "outcome": "b",
+      "transfer": 1
+    },
+    {
+      "seq": 71,
+      "t": 10092,
+      "kind": "system",
+      "text": "THE HOLD SETTLES."
+    },
+    {
+      "seq": 72,
+      "t": 10392,
+      "kind": "elim",
+      "text": "SEAT 04 — THE NOTE CAME DUE. The note comes due before the door opens.",
+      "seat": 3
+    },
+    {
+      "seq": 73,
+      "t": 10392,
+      "kind": "intercom",
+      "text": "ACT I CLOSES. EVERY CARD SPENT."
+    },
+    {
+      "seq": 74,
+      "t": 10392,
+      "kind": "system",
+      "text": "SURVIVORS: SEAT 01 · SEAT 02 · SEAT 03."
+    },
+    {
+      "seq": 75,
+      "t": 10393,
+      "kind": "intercom",
+      "text": "The last two will be invited to the back room."
+    },
+    {
+      "seq": 76,
+      "t": 10393,
+      "kind": "system",
+      "text": "ACT II — THE BACK ROOM. Two chairs. Five cards. No witnesses."
+    },
+    {
+      "seq": 77,
+      "t": 10393,
+      "kind": "system",
+      "text": "SEAT 01 sits as the CROWN. SEAT 03 sits as the REBEL."
+    },
+    {
+      "seq": 78,
+      "t": 10397,
+      "kind": "system",
+      "text": "SEAT 01 takes the CROWN."
+    },
+    {
+      "seq": 79,
+      "t": 10441,
+      "kind": "system",
+      "text": "ROUND 1 — BETS DOWN."
+    },
+    {
+      "seq": 80,
+      "t": 10506,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 81,
+      "t": 10538,
+      "kind": "duel",
+      "text": "ROUND 1 · SEAT 01 shows CROWN · SEAT 03 shows CITIZEN. No blood.",
+      "round": 1,
+      "cards": {
+        "a": "crown",
+        "b": "citizen"
+      },
+      "bets": {
+        "a": 5,
+        "b": 0
+      },
+      "outcome": "a",
+      "transfer": 0,
+      "multiplier": 1
+    },
+    {
+      "seq": 82,
+      "t": 10779,
+      "kind": "system",
+      "text": "ROUND 2 — BETS DOWN."
+    },
+    {
+      "seq": 83,
+      "t": 10820,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 84,
+      "t": 10865,
+      "kind": "duel",
+      "text": "ROUND 2 · SEAT 01 shows CITIZEN · SEAT 03 shows CITIZEN. No blood.",
+      "round": 2,
+      "cards": {
+        "a": "citizen",
+        "b": "citizen"
+      },
+      "bets": {
+        "a": 5,
+        "b": 0
+      },
+      "outcome": "tie",
+      "transfer": 0,
+      "multiplier": 1
+    },
+    {
+      "seq": 85,
+      "t": 11105,
+      "kind": "system",
+      "text": "ROUND 3 — BETS DOWN."
+    },
+    {
+      "seq": 86,
+      "t": 11179,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 87,
+      "t": 11220,
+      "kind": "duel",
+      "text": "ROUND 3 · SEAT 01 shows CITIZEN · SEAT 03 shows REBEL. SEAT 01 takes 5.",
+      "round": 3,
+      "cards": {
+        "a": "citizen",
+        "b": "rebel"
+      },
+      "bets": {
+        "a": 5,
+        "b": 6
+      },
+      "outcome": "a",
+      "transfer": 5,
+      "multiplier": 1
+    },
+    {
+      "seq": 88,
+      "t": 11461,
+      "kind": "system",
+      "text": "ROUND 4 — BETS DOWN."
+    },
+    {
+      "seq": 89,
+      "t": 11494,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 90,
+      "t": 11548,
+      "kind": "duel",
+      "text": "ROUND 4 · SEAT 01 shows CITIZEN · SEAT 03 shows CITIZEN. No blood.",
+      "round": 4,
+      "cards": {
+        "a": "citizen",
+        "b": "citizen"
+      },
+      "bets": {
+        "a": 5,
+        "b": 0
+      },
+      "outcome": "tie",
+      "transfer": 0,
+      "multiplier": 1
+    },
+    {
+      "seq": 91,
+      "t": 11788,
+      "kind": "system",
+      "text": "ROUND 5 — BETS DOWN."
+    },
+    {
+      "seq": 92,
+      "t": 11895,
+      "kind": "system",
+      "text": "SHOW."
+    },
+    {
+      "seq": 93,
+      "t": 11918,
+      "kind": "duel",
+      "text": "ROUND 5 · SEAT 01 shows CITIZEN · SEAT 03 shows CITIZEN. No blood.",
+      "round": 5,
+      "cards": {
+        "a": "citizen",
+        "b": "citizen"
+      },
+      "bets": {
+        "a": 5,
+        "b": 14
+      },
+      "outcome": "tie",
+      "transfer": 0,
+      "multiplier": 1
+    },
+    {
+      "seq": 94,
+      "t": 12159,
+      "kind": "intercom",
+      "text": "THE VOYAGE ENDS. SEAT 01 TAKES THE POT."
+    }
+  ]
+}
