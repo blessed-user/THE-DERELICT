@@ -13,6 +13,7 @@ CONF=/etc/zecd/zecd.toml
 ZECD_CONFIG=/tmp/zecd.toml
 ZECD_BACKEND="${ZECD_BACKEND:-zebra://zebra:18234}"
 
+chown -R zecd:zecd "$DATADIR"
 sed "s|server = \"zebra://zebra:18234\"|server = \"$ZECD_BACKEND\"|" "$CONF" > "$ZECD_CONFIG"
 
 wait_for_chain() {
@@ -41,7 +42,7 @@ if [ ! -d "$WALLET_DIR" ]; then
   fi
   wait_for_chain
   printf '%s\n' "$ZECD_MNEMONIC" |
-    zecd --datadir "$DATADIR" --conf="$ZECD_CONFIG" init --restore --birthday "$ZECD_BIRTHDAY"
+    su-exec zecd zecd --datadir "$DATADIR" --conf="$ZECD_CONFIG" init --restore --birthday "$ZECD_BIRTHDAY"
 fi
 
-exec zecd --datadir "$DATADIR" --conf="$ZECD_CONFIG"
+exec su-exec zecd zecd --datadir "$DATADIR" --conf="$ZECD_CONFIG"
