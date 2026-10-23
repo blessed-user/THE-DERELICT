@@ -110,6 +110,7 @@ let duel = null;
 let act1Committed = false;
 let act1RevealSent = false;
 let duelRevealSent = false;
+let duelCommitStarted = false;
 const usedRps = new Set();
 const usedDuel = new Set();
 const sent = new Set();
@@ -214,12 +215,16 @@ async function onState(s) {
     }
   }
 
-  if (s.status === 'finale' && s.phase === 'finale_intro' && s.finale?.needHandCommit && !duel) {
+  if (s.status === 'finale' && s.phase === 'finale_intro' && s.finale?.needHandCommit && !duel && !duelCommitStarted) {
+    duelCommitStarted = true;
     const role = s.finale.yourRole;
     duel = await makeHand(handFor(role));
     const commit = await duelHandCommit(tableId, seat, duel.root);
     const ack = await action('duel_hand_commit', { root: duel.root, commit });
-    if (!ack.ok) console.error('duel_hand_commit', ack.error);
+    if (!ack.ok) {
+      console.error('duel_hand_commit', ack.error);
+      duelCommitStarted = false;
+    }
     return;
   }
 
