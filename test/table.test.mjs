@@ -135,3 +135,29 @@ test('hand_reveal is refused while the hand can still be played', async () => {
 
   table.dispose();
 });
+
+test('a settled table accepts a delayed human hand reveal and refreshes audit completeness', async () => {
+  const table = makeTable();
+  const seat = table.addSeat({ connected: true });
+  const hand = await makeHand(['rock', 'rock', 'paper', 'paper', 'scissors', 'scissors']);
+  seat.act1HandRoot = hand.root;
+  seat.act1HandCommit = await handCommit(table.id, seat.seat, hand.root);
+  seat.act1HandReady = true;
+  table.status = 'settled';
+  table.audit = table.buildAudit();
+
+  assert.equal(table.audit.complete, false);
+  const result = await table.action(seat.seat, 'hand_reveal', {
+    act: 'act1',
+    cards: hand.cards,
+    salts: hand.salts,
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(table.audit.complete, true);
+  assert.deepEqual(table.audit.act1.seats[0].act1HandReveal, {
+    cards: hand.cards,
+    salts: hand.salts,
+  });
+  table.dispose();
+});

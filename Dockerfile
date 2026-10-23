@@ -20,5 +20,5 @@ COPY --from=spa /app/web/dist ./web/dist
 ENV PORT=8791
 EXPOSE 8791
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:8791/api/config || exit 1
+  CMD wget -qO- "http://127.0.0.1:${PORT:-8791}/api/config" || exit 1
 CMD ["node", "server/index.mjs"]

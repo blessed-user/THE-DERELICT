@@ -8,12 +8,14 @@ funder wallet.
 - license: see `zecd licenses` in the running container (third-party crate licenses are
   bundled by zecd); the DERELICT code itself is MIT
 
-The image builds `./docker/zecd` and runs `derelict-entrypoint.sh`, which:
+The image builds from the repository root using `docker/zecd/Dockerfile` and runs
+`derelict-entrypoint.sh`, which:
 
 1. waits for Zebra to reach the wallet birthday,
 2. restores the demo seed from `ZECD_MNEMONIC` on a fresh volume (the public BIP-39 test
    vector in `.env.example`), and
-3. starts zecd with `regtest/zecd.toml`.
+3. starts zecd with `regtest/zecd.toml`. Set `ZECD_BACKEND` to override the default
+   `zebra://zebra:18234` backend URL for a deployment using a different private hostname.
 
 To use a locally built zecd instead, replace `docker/zecd/zecd` with your binary and
 rebuild:

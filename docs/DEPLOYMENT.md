@@ -26,47 +26,103 @@ in-memory tables or the WebSocket connections the game needs. It also cannot hos
 the funder wallet. A Vercel deployment is therefore **practice and private-table only**
 unless you point it at a Railway deployment that has the regtest stack.
 
-## 1. Backend on Railway
+## 1. Game backend on Railway
 
-1. Create a Railway project from this repository.
-2. Add a service. `railway.json` asks Nixpacks for `npm ci --omit=dev` and starts
-   `npm start` (`node server/index.mjs`); `.nvmrc` pins Node 22.
-3. Set these service variables:
+Create a Railway project from this repository and add a game service. The root
+`Dockerfile` builds the game and SPA; `.nvmrc` pins Node 22. Railway injects `PORT`, and
+the server binds `0.0.0.0`. Attach a persistent volume at `/data` and set `DATA_DIR=/data`.
+Set the game service health check to `/api/health`.
+
+For a free-practice deployment, set `CHAIN_MODE=off`. That setting is not suitable for
+the on-chain judge demo: it disables staked tables and the test-wallet faucet.
+
+## 2. Regtest services on Railway
+
+The judge demo uses a private regtest chain, not Zcash mainnet or public testnet. Deploy
+these four services in the same Railway project **environment** and keep the node RPCs
+private. Railway services can reach one another through private DNS; the service names in
+the URLs below must match the Railway service names exactly.
+
+### Zebra
+
+1. Add a service from this repository named `zebra`, with the repository root as its
+   source directory.
+2. Set `RAILWAY_DOCKERFILE_PATH=/docker/railway/Zebra.Dockerfile`.
+3. Attach a persistent volume at `/var/cache/zebra`.
+4. Do not create a public TCP proxy for port `18234`.
+
+### Funder wallet
+
+1. Add a service named `funder` from the same repository, with the repository root as its
+   source directory.
+2. Set `RAILWAY_DOCKERFILE_PATH=/docker/zecd/Dockerfile`.
+3. Attach a persistent volume at `/var/lib/zecd`.
+4. Set these variables:
 
    | Variable | Value |
    | --- | --- |
-   | `DATA_DIR` | `/data` |
-   | `CHAIN_MODE` | `off` |
-   | `APP_ORIGIN` | `https://<your-frontend>.vercel.app` |
-   | `PHASE_SCALE` | `1` (use `0.1` only for automated demos) |
+   | `ZECD_MNEMONIC` | The published demo-only regtest seed from the local `.env.example` |
+   | `ZECD_BACKEND` | `zebra://zebra.railway.internal:18234` |
+   | `ZEBRA_RPC` | `http://zebra.railway.internal:18234/` |
 
-   Railway injects `PORT`; the server binds `0.0.0.0` by default. If you prefer a
-   different bind address, set `HOST`.
-4. Attach a volume mounted at `/data`. Without it, tables and test-wallet ledgers vanish
-   on every redeploy.
-5. Set the health check to `/api/health` (already in `railway.json`).
-6. Copy the public service URL, for example
-   `https://derelict-production.up.railway.app`.
+The funder image includes `regtest/zecd.toml`. Its entrypoint substitutes the
+`ZECD_BACKEND` address so the wallet connects to Railway's private Zebra hostname. The
+funder RPC on port `18242` must not be publicly exposed. Use only the published demo
+seed; never use a personal or funded wallet seed.
 
-`CHAIN_MODE=off` is deliberate. It disables staked tables and the regtest faucet, and the
-game runs with free practice money. Do not put a real Zcash seed in a hosted environment.
+### Bootstrap the chain once
 
-### Running the full staked stack on Railway
+1. Add a service named `bootstrap` from the same repository, with the repository root as
+   its source directory.
+2. Set `RAILWAY_DOCKERFILE_PATH=/docker/railway/Bootstrap.Dockerfile`.
+3. Set these variables:
 
-The local `compose.yml` is the supported staked path. A Railway version would need:
+   | Variable | Value |
+   | --- | --- |
+   | `ZEBRA_URL` | `http://zebra.railway.internal:18234/` |
+   | `FUNDER_URL` | `http://funder.railway.internal:18242/` |
+   | `FUNDER_USER` | `funder` |
+   | `FUNDER_PASS` | `regtest-funder-pw` |
+   | `BRINGUP_BLOCKS` | `105` |
 
-- a Zebra service with a persistent volume and a private RPC URL;
-- the `docker/zecd` funder image with a persistent `/var/lib/zecd` volume;
-- the one-shot bootstrap job (`e2e/bootstrap.mjs`) to mine and shield the coinbase;
-- the game service with `CHAIN_MODE=regtest`, `ZECD_URL`, `ZEBRA_URL`, `AUTO_MINE=1`,
-  and the same funder credentials.
+Wait for Zebra and the funder service to be running, then deploy/run `bootstrap`. It mines
+the coinbase maturity blocks, shields the funds into the funder wallet, and exits after
+verifying a spendable note. It is safe to rerun after a redeploy; it checks for an existing
+shielded note before shielding again. Configure this service as a one-shot job or stop it
+after a successful run.
 
-That is a demo-only regtest chain, not mainnet. It is more moving parts than the free
-deployment needs, and judges can run the whole thing locally with one command. Leave it
-out of the public split deployment unless you specifically need staked demos over the
-internet.
+### Enable staked regtest in the game service
 
-## 2. Frontend on Vercel
+Set these variables on the game service:
+
+| Variable | Value |
+| --- | --- |
+| `DATA_DIR` | `/data` |
+| `CHAIN_MODE` | `regtest` |
+| `ZECD_URL` | `http://funder.railway.internal:18242/` |
+| `ZECD_USER` | `funder` |
+| `ZECD_PASS` | `regtest-funder-pw` |
+| `ZEBRA_URL` | `http://zebra.railway.internal:18234/` |
+| `AUTO_MINE` | `1` |
+| `APP_ORIGIN` | Exact browser origin, e.g. `https://thezecathon.com` |
+| `PHASE_SCALE` | `1` |
+
+Deploy the game service after the bootstrap succeeds. Check
+`https://<game-service>/api/health`; `chain` should report `enabled: true`, `mode:
+"regtest"`, `staked: true`, and an `ok: true` health result with chain information. If it
+reports `chain off`, `ZECD_URL` is missing or empty. If it reports an RPC error, check
+that all services are in the same Railway environment, their service names match the
+private DNS URLs, and the funder has finished starting.
+
+For a Vercel frontend, set `VITE_API_BASE` to the Railway game service's public HTTPS
+origin, set `APP_ORIGIN` to the exact Vercel/browser origin, and redeploy the frontend.
+Do not point the browser directly at Zebra or the funder.
+
+Regtest transactions are real transactions on this deployment's isolated chain. They
+cannot be looked up in a public Zcash explorer or spent on mainnet. Keep the node RPCs
+private and present the app's transaction IDs and audit alongside the demo.
+
+## 3. Frontend on Vercel
 
 1. Import the same repository into Vercel.
 2. Keep the root directory at the repository root. `vercel.json` already sets:
@@ -96,7 +152,7 @@ internet.
 The checked-in `vercel.json` CSP allows `connect-src 'self' https: wss:`. Tighten it to
 your specific backend origin if you want a stricter public deployment.
 
-## 3. Origin and CORS rules
+## 4. Origin and CORS rules
 
 - `APP_ORIGIN` is an exact-origin allow-list. Comma-separated values are accepted:
   `APP_ORIGIN=https://game.example,https://game-git-preview.example`.
@@ -107,7 +163,7 @@ your specific backend origin if you want a stricter public deployment.
 - Vercel preview deployments get a new origin per deployment. Add that origin to
   `APP_ORIGIN` if you need to test a preview against the shared backend.
 
-## 4. Storage and limits
+## 5. Storage and limits
 
 - `DATA_DIR` holds `derelict.db`. Use a persistent volume on Railway.
 - `MAX_TABLES` (default 500) and `TABLE_TTL_MS` (default 6 hours) bound memory and disk.
@@ -116,7 +172,7 @@ your specific backend origin if you want a stricter public deployment.
 - The server keeps all active tables in memory. A restart ends open voyages. This is a
   demo server, not a durable tournament service.
 
-## 5. Smoke test
+## 6. Smoke test
 
 ```bash
 curl -s https://<railway-host>/api/health

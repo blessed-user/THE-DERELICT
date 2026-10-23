@@ -397,17 +397,33 @@ export default function App() {
     };
 
     // Full-hand reveals for the audit. These happen even after elimination.
-    if (s.needHandReveal && h.act1) {
-      await once(`reveal-act1:${sess.tableId}`, async () => {
-        const ack = await act('hand_reveal', { act: 'act1', cards: h.act1.cards, salts: h.act1.salts });
-        if (!ack.ok) notify(`hand reveal: ${ack.error}`, 'bad');
-      });
+    if (s.needHandReveal) {
+      if (!h.act1) {
+        const key = `missing-act1-hand:${sess.tableId}`;
+        if (!flagsRef.current.has(key)) {
+          flagsRef.current.add(key);
+          notify(`hand reveal: this browser has no saved hand for seat ${s.you.seat}`, 'bad');
+        }
+      } else {
+        await once(`reveal-act1:${sess.tableId}`, async () => {
+          const ack = await act('hand_reveal', { act: 'act1', cards: h.act1.cards, salts: h.act1.salts });
+          if (!ack.ok) notify(`hand reveal: ${ack.error}`, 'bad');
+        });
+      }
     }
-    if (s.needDuelHandReveal && h.duel) {
-      await once(`reveal-duel:${sess.tableId}`, async () => {
-        const ack = await act('hand_reveal', { act: 'duel', cards: h.duel.cards, salts: h.duel.salts });
-        if (!ack.ok) notify(`duel reveal: ${ack.error}`, 'bad');
-      });
+    if (s.needDuelHandReveal) {
+      if (!h.duel) {
+        const key = `missing-duel-hand:${sess.tableId}`;
+        if (!flagsRef.current.has(key)) {
+          flagsRef.current.add(key);
+          notify(`duel hand reveal: this browser has no saved hand for seat ${s.you.seat}`, 'bad');
+        }
+      } else {
+        await once(`reveal-duel:${sess.tableId}`, async () => {
+          const ack = await act('hand_reveal', { act: 'duel', cards: h.duel.cards, salts: h.duel.salts });
+          if (!ack.ok) notify(`duel reveal: ${ack.error}`, 'bad');
+        });
+      }
     }
 
     if (s.needHandCommit && !h.act1) {
@@ -458,10 +474,10 @@ export default function App() {
 
   // A slow heartbeat recovers a send whose ack was lost with a socket.
   useEffect(() => {
-    if (!state || state.status === 'settled') return;
+    if (!state || (state.status === 'settled' && !state.needHandReveal && !state.needDuelHandReveal)) return;
     const id = setInterval(() => setDriveTick((t) => t + 1), 3000);
     return () => clearInterval(id);
-  }, [state?.status]);
+  }, [state?.status, state?.needHandReveal, state?.needDuelHandReveal]);
 
   // --------------------------------------------------------- deadline picks
   useEffect(() => {
@@ -787,6 +803,7 @@ export default function App() {
   useEffect(() => {
     if (state?.status !== 'settled' || !session) return;
     let cancelled = false;
+    auditTries.current = 0;
     const load = async () => {
       setVerifying(true);
       try {
@@ -816,7 +833,7 @@ export default function App() {
     };
     load();
     return () => { cancelled = true; };
-  }, [state?.status, session?.tableId]);
+  }, [state?.status, state?.needHandReveal, state?.needDuelHandReveal, session?.tableId]);
 
   function downloadAudit() {
     if (!audit) return;

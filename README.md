@@ -147,11 +147,12 @@ the Docker stack below remains the recommended demo. For the split:
   `VITE_WS_BASE`), so API calls and the socket cross to the backend;
 - set `APP_ORIGIN=https://<vercel-host>` on the server, which allows that exact origin for
   HTTP and the WebSocket upgrade;
-- run the backend with `CHAIN_MODE=off` for free practice and private tables.
+- use `CHAIN_MODE=off` for free practice, or deploy the Zebra + zecd + bootstrap services
+  and use `CHAIN_MODE=regtest` for the staked judge demo.
 
 Vercel cannot host the Node/WebSocket server, and the full Zebra + zecd staked stack is
 not a Vercel service. Full steps, Railway variables, volumes, and the staked-mode
-trade-offs are in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). The checked-in
+setup are in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). The checked-in
 `vercel.json` and `railway.json` are the deployment metadata.
 
 ### Self-contained regtest stack (zebra + zecd + app)
@@ -180,7 +181,7 @@ and audit can be seen end to end.
 ### Tests
 
 ```bash
-npm test             # 43 engine/rule, bankroll/ledger, pacing, privacy-gate, and audit-tamper tests
+npm test             # engine/rule, bankroll/ledger, pacing, privacy-gate, and audit-tamper tests
 npm run e2e          # headless human vs. three bots, then client-side audit
 npm run ui           # headless Chrome voyage + screenshots in e2e/
 npm run ui:stake     # headless Chrome staked flow against the Docker stack

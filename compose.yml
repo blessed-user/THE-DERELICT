@@ -21,7 +21,9 @@ services:
       - "127.0.0.1:18234:18234"
 
   funder:
-    build: ./docker/zecd
+    build:
+      context: .
+      dockerfile: docker/zecd/Dockerfile
     depends_on:
       - zebra
     environment:
@@ -29,7 +31,6 @@ services:
       - ZEBRA_RPC=http://zebra:18234/
       - ZECD_REGTEST_NU63_HEIGHT=8
     volumes:
-      - ./regtest/zecd.toml:/etc/zecd/zecd.toml:ro
       - funder-data:/var/lib/zecd
     ports:
       - "127.0.0.1:18242:18242"
