@@ -13,7 +13,7 @@
     "server": "node server/index.mjs",
     "dev": "node scripts/dev.mjs",
     "build": "vite build web",
-    "test": "node --test test/",
+    "test": "node --test",
     "e2e": "node e2e/protocol.mjs",
     "ui": "node e2e/ui.mjs",
     "ui:stake": "node e2e/ui-stake.mjs",
