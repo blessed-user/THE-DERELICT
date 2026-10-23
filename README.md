@@ -10,8 +10,40 @@ Built for [Zecathon 2026](https://thezecathon.com/) · **Wildcard track** · MIT
 > shown, every play carries a proof, and after the voyage the whole table is revealed so
 > anyone can audit it. Staked fares enter and leave as shielded Zcash transactions.
 
-THE DERELICT is an original game inspired by the pressure-cooker gambling fiction of
-Kaiji: The Ultimate Gambler. It uses no Kaiji names, characters, art, or catchphrases.
+THE DERELICT is an original game inspired by the high-stakes psychological games in the
+movie *Kaiji: The Ultimate Gambler*. It is an independent work, not an adaptation or
+officially affiliated with the film.
+
+## Judge's quick guide
+
+THE DERELICT is a survival card game about making deals, managing risk, and deciding what
+to reveal. Four seats begin with stars, chips, and secret cards. In the first act, players
+challenge one another with rock-paper-scissors while trading, bargaining, and taking loans.
+The last contenders enter a five-round hidden-card duel, where each play includes a sealed
+bet.
+
+**The privacy demonstration:** a player's browser commits to a salted hand before play.
+For each move it reveals only the chosen card and a proof that the card belongs to that
+committed hand. Opponents do not get the unplayed cards during the game. Once play ends,
+hands and the game record are revealed so anyone can run the audit.
+
+**What is on chain:** the staked demo sends shielded Zcash transactions for fares and
+settlement, and anchors the final game-economy audit hash in a transaction memo. The live
+demo runs on a private **regtest** chain: these are real transactions on that test network,
+but its coins have no monetary value.
+
+**What is game accounting:** stars, chips, trades, loans, and duel bets are not tokens or
+separate Zcash transactions. They are recorded in the server's game ledger. In a staked
+run, the fare and final settlement move ZEC; separate regtest faucet and test-wallet flows
+also send test ZEC. House seats and bots are controlled by the server. The house also
+controls the bankroll, so this is a custodial demo—not a trustless game or an escrow
+contract.
+
+**What the audit proves:** the downloadable audit independently checks the committed
+hands, card proofs, round results, ledger, and payout calculation. An offline audit does
+not prove a Zcash transaction occurred; checking chain settlement requires a trusted wallet
+RPC. The operator can see played cards, private offers, and connection metadata, while
+unplayed human cards remain hidden during play.
 
 <p align="center">
   <img src="docs/screenshot-landing.png" alt="THE DERELICT landing screen: practice, private, and staked tables" width="100%">
