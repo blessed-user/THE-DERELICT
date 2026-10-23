@@ -7,7 +7,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-import { verifyAudit } from '../shared/audit.js';
+import { verifyAudit, verifyEconomyAnchorTransaction } from '../shared/audit.js';
+import { economyCommitmentHash } from '../shared/economy.js';
 
 const FIXTURE = fileURLToPath(new URL('./fixtures/audit.json', import.meta.url));
 const raw = JSON.parse(await readFile(FIXTURE, 'utf8'));
@@ -35,6 +36,54 @@ test('the untouched fixture verifies', async () => {
   const verdict = await verifyAudit(clone());
   assert.deepEqual(verdict.errors, []);
   assert.equal(verdict.ok, true);
+});
+
+test('a staked audit commitment verifies and detects a changed ledger', async () => {
+  const audit = clone();
+  const hash = await economyCommitmentHash(audit);
+  audit.settlement.economyAnchor = {
+    version: 1,
+    hash,
+    memo: `derelict:v1|economy|${audit.tableId}|${hash}`,
+    txid: 'a'.repeat(64),
+    status: 'published',
+  };
+
+  const verdict = await verifyAudit(audit);
+  assert.deepEqual(verdict.errors, []);
+  assert.ok(
+    verdict.warnings.some((warning) => /transaction and shielded memo were not verified offline/.test(warning)),
+    'a well-formed txid must not imply chain verification',
+  );
+
+  const chainRows = [{
+    txid: audit.settlement.economyAnchor.txid,
+    memoStr: audit.settlement.economyAnchor.memo,
+    confirmations: 1,
+  }];
+  assert.deepEqual(verifyEconomyAnchorTransaction(audit, chainRows), { ok: true, confirmations: 1 });
+  const chainVerified = await verifyAudit(audit, { chainTransactions: chainRows });
+  assert.equal(chainVerified.warnings.some((warning) => /transaction and shielded memo were not verified offline/.test(warning)), false);
+
+  assert.match(verifyEconomyAnchorTransaction(audit, [{
+    ...chainRows[0],
+    txid: 'c'.repeat(64),
+  }]).reason, /not found/);
+  assert.match(verifyEconomyAnchorTransaction(audit, [{
+    ...chainRows[0],
+    memoStr: 'fabricated memo',
+  }]).reason, /expected memo/);
+  assert.match(verifyEconomyAnchorTransaction(audit, [{
+    ...chainRows[0],
+    confirmations: 0,
+  }]).reason, /not yet confirmed/);
+
+  audit.act1.seats[0].starsEnd += 1;
+  const tampered = await verifyAudit(audit);
+  assert.ok(
+    tampered.errors.some((error) => /economy anchor hash/.test(error)),
+    tampered.errors.join('\n'),
+  );
 });
 
 test('an incomplete audit is rejected', async () => {

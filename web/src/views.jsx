@@ -209,7 +209,7 @@ export function RulesModal({ open, onClose }) {
           </p>
           <ol className="how-steps">
             <li><strong>CHOOSE YOUR ENTRY FARE.</strong> In <strong>STAKE A FARE</strong>, choose 0.01–0.20 ZEC (default 0.05). Choose your test wallet or enter a shielded address for any payout.</li>
-            <li><strong>PAY ONCE, SHIELDED.</strong> Send the exact fare to the table&apos;s fresh address with the memo shown, or press <strong>PAY THE FARE FROM TEST WALLET</strong>. The house holds it as your bankroll; it is not a bet against another player.</li>
+            <li><strong>PAY ONCE, SHIELDED.</strong> Continue to the payment screen, then confirm the fare from your test balance or send it from an external wallet. Faucet credit only adds test funds; it does not pay the fare. The house holds the fare as your bankroll, not as a bet against another player.</li>
             <li><strong>CHIPS CARRY THE VALUE.</strong> The fare buys your 40 Act I chips, so one chip is worth fare ÷ 40. Trade chips away and you carry less into the back room; win chips and you carry more.</li>
             <li><strong>THE HOUSE MATCHES THE BACK ROOM.</strong> Your surviving chips are rescaled to 100 back-room chips worth your surviving bankroll. The house puts up the same amount, making the pot 2× your bankroll.</li>
             <li><strong>ONE PAYOUT.</strong> Win the duel and the house sends you the matched pot. Tie and your bankroll comes back. Lose the duel or fall in Act I and nothing is paid. For a test wallet the pot is credited to its house-held ledger; for an external wallet it arrives at your shielded address.</li>
@@ -906,21 +906,23 @@ export function DepositView({
         </p>
         {usingWallet && (
           <div className="faucet demo-fare wallet-fare">
-            <h3>TEST WALLET · PAY THE FARE</h3>
+            <h3>PAY THIS FARE FROM YOUR TEST BALANCE</h3>
             <p>
-              Your house-custodied test ledger holds{' '}
-              <strong>{(walletBalance / 1e8).toFixed(4)} ZEC</strong>. Paying debits the fare
-              and sends the real shielded transaction to this table&apos;s fresh address with the memo.
+              Fare: <strong>{(deposit.zats / 1e8).toFixed(4)} ZEC</strong>. Available:{' '}
+              <strong>{(walletBalance / 1e8).toFixed(4)} test ZEC</strong>. Confirming debits your
+              house-held test balance and sends the fare to this table&apos;s shielded address.
             </p>
             <button type="button" className="btn primary" onClick={onWalletPay} disabled={busy || !enough}>
-              {busy ? 'SENDING…' : enough ? 'PAY THE FARE FROM TEST WALLET' : 'TEST WALLET SHORT'}
+              {busy ? 'SENDING FARE…' : enough
+                ? `CONFIRM ${(deposit.zats / 1e8).toFixed(4)} ZEC TEST PAYMENT`
+                : 'TEST BALANCE TOO LOW'}
             </button>
             {!enough && (
               <p className="muted tiny">
-                The ledger is short. Request test ZEC from the profile sheet, then come back.
+                Request test ZEC from the wallet, then return here. The faucet does not pay the fare automatically.
               </p>
             )}
-            <button type="button" className="btn small ghost" onClick={onWallet}>OPEN TEST WALLET</button>
+            <button type="button" className="btn small ghost" onClick={onWallet}>OPEN TEST WALLET / FAUCET</button>
           </div>
         )}
         {!usingWallet && config?.chain?.faucet && (
@@ -973,8 +975,9 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
 
   const zats = Math.round(Number(zecAmount) * 1e8);
   const valid = Number.isInteger(zats) && zats >= minZats && zats <= maxZats;
+  const balanceLoaded = walletInfo?.balanceZats != null;
   const balance = Number(walletInfo?.balanceZats ?? 0);
-  const enough = !payFromWallet || balance >= zats;
+  const enough = !payFromWallet || (balanceLoaded && balance >= zats);
   const chipZec = valid ? zats / startChips / 1e8 : null;
   const canSubmit = valid && enough && (payFromWallet ? Boolean(wallet?.address) : Boolean(ua.trim()));
   const submit = (event) => {
@@ -1014,15 +1017,17 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
           <div className="wallet-choice">
             <label className={payFromWallet ? 'on' : ''}>
               <input type="radio" name="fare-source" checked={payFromWallet} onChange={() => setPayFromWallet(true)} />
-              PAY WITH TEST WALLET
+              USE TEST WALLET
             </label>
-            <span className="muted tiny">
-              ledger {(balance / 1e8).toFixed(4)} ZEC · {wallet.address.slice(0, 16)}…
-            </span>
-            <button type="button" className="btn small ghost" onClick={onWallet}>FAUCET / PROFILE</button>
+            <div className="stake-wallet-balance">
+              <span>{balanceLoaded ? 'AVAILABLE TEST BALANCE' : 'TEST BALANCE'}</span>
+              <strong>{balanceLoaded ? `${(balance / 1e8).toFixed(4)} ZEC` : 'CHECKING…'}</strong>
+              <small>House-held regtest credit · no real-world value</small>
+            </div>
+            <button type="button" className="btn small ghost" onClick={onWallet}>MANAGE TEST WALLET / FAUCET</button>
             <label className={!payFromWallet ? 'on' : ''}>
               <input type="radio" name="fare-source" checked={!payFromWallet} onChange={() => setPayFromWallet(false)} />
-              PAY WITH EXTERNAL WALLET
+              USE EXTERNAL WALLET
             </label>
             {!payFromWallet && (
               <div className="field-block">
@@ -1031,10 +1036,14 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
                 <p className="muted tiny">Enter a Unified Address (u1…) or Sapling address (zs…). You will need to send the fare with the table memo.</p>
               </div>
             )}
-            {payFromWallet && !enough && (
+            {payFromWallet && !balanceLoaded && (
+              <p className="muted tiny" role="status">Checking your test wallet balance…</p>
+            )}
+            {payFromWallet && balanceLoaded && !enough && (
               <p className="wallet-short">
-                The test ledger is short by {((zats - balance) / 1e8).toFixed(4)} ZEC. Use the
-                faucet, or pay from an external wallet.
+                You need {valid ? (zats / 1e8).toFixed(4) : '—'} ZEC for this fare, but the test
+                balance is short by {valid ? ((zats - balance) / 1e8).toFixed(4) : '—'} ZEC.
+                Request test ZEC above, or choose an external wallet.
               </p>
             )}
           </div>
@@ -1047,9 +1056,14 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
         )}
 
         <p className="muted tiny">The house holds the fare; it is not protected by an escrow contract. Regtest demo only—never use a funded wallet.</p>
+        <p className="stake-next-step">
+          {payFromWallet && wallet?.address
+            ? `Next: review the payment, then confirm a ${valid ? (zats / 1e8).toFixed(4) : '—'} ZEC debit from your test balance. Requesting faucet credit does not pay this fare.`
+            : 'Next: review the shielded address and memo, then pay this fare from your external wallet.'}
+        </p>
         {notice && <div className={`notice ${notice.tone ?? ''}`}>{notice.text}</div>}
         <div className="btn-row">
-          <button type="submit" className="btn primary" disabled={busy || !canSubmit}>{busy ? 'OPENING…' : 'OPEN THE TABLE'}</button>
+          <button type="submit" className="btn primary" disabled={busy || !canSubmit}>{busy ? 'PREPARING PAYMENT…' : 'CONTINUE TO PAYMENT'}</button>
           <button type="button" className="btn ghost" onClick={onCancel}>BACK</button>
         </div>
       </form>
@@ -1618,8 +1632,40 @@ export function ResultPanel({ state, audit, verdict, verifying, onDownload, onLe
           {state.settlement.walletCredited ? ' · CREDITED TO TEST WALLET' : ''}
         </p>
       )}
+      {state.mode === 'solo' && state.settlement?.economyAnchor && (
+        <section className={`economy-anchor ${state.settlement.economyAnchor.status}`} aria-live="polite" aria-label="On-chain economy audit">
+          <h3>ECONOMY AUDIT · {(state.settlement.economyAnchor.chainMode ?? 'regtest').toUpperCase()}</h3>
+          <p>
+            {state.settlement.economyAnchor.status === 'published'
+              ? state.settlement.payoutZats > 0
+                ? 'Your payout transaction carries a commitment to the audit containing your chip and star moves.'
+                : 'A 1-zatoshi shielded receipt to your payout address carries the chip and star audit commitment.'
+              : state.settlement.economyAnchor.status === 'failed'
+                ? `The chip and star audit could not be anchored on chain.${state.settlement.economyAnchor.error ? ` ${state.settlement.economyAnchor.error}` : ''}`
+                : `Submitting the chip and star audit commitment to ${state.settlement.economyAnchor.chainMode ?? 'regtest'}…`}
+          </p>
+          {state.settlement.economyAnchor.txid && (
+            <div><span>TRANSACTION</span><code>{state.settlement.economyAnchor.txid}</code></div>
+          )}
+          {state.settlement.economyAnchor.memo && (
+            <div><span>SHIELDED MEMO</span><code>{state.settlement.economyAnchor.memo}</code></div>
+          )}
+          {state.settlement.economyAnchor.hash && (
+            <div><span>AUDIT SHA-256</span><code>{state.settlement.economyAnchor.hash}</code></div>
+          )}
+          <p className="muted tiny">
+            The downloadable audit contains the individual moves. Chips and stars are game
+            accounting, not separate ZEC tokens or per-move transfers. The recipient wallet
+            can inspect the shielded memo; the in-app test wallet is house-custodied.
+          </p>
+        </section>
+      )}
       {state.mode === 'solo' && state.settlement && !state.settlement.payoutZats && (
-        <p className="muted tiny">The fare stayed with the house. A staked payout requires winning the back room.</p>
+        <p className="muted tiny">
+          The fare stayed with the house. {state.settlement.economyAnchor?.status === 'published'
+            ? 'The 1-zatoshi receipt is only for verifying the audit commitment, not a game payout.'
+            : 'A staked payout requires winning the back room.'}
+        </p>
       )}
       <div className="standings">
         {standings.map((s) => (
@@ -1638,7 +1684,7 @@ export function ResultPanel({ state, audit, verdict, verifying, onDownload, onLe
       )}
 
       <div className={`panel audit-panel ${verdict?.ok ? 'ok' : verdict ? 'bad' : ''}`}>
-        <header className="panel-head"><span>THE AUDIT</span><span className="panel-head-sub">{verifying ? 'VERIFYING…' : verdict?.ok ? 'OK' : verdict ? 'FAILED' : 'PENDING'}</span></header>
+        <header className="panel-head"><span>GAME AUDIT</span><span className="panel-head-sub">{verifying ? 'VERIFYING…' : verdict?.ok ? 'OK' : verdict ? 'FAILED' : 'PENDING'}</span></header>
         {verifying && <p className="muted">Rebuilding every hand, proof and ledger locally…</p>}
         {!verifying && verdict && (
           <>
@@ -1648,6 +1694,11 @@ export function ResultPanel({ state, audit, verdict, verifying, onDownload, onLe
                 : `${verdict.errors.length} problem${verdict.errors.length === 1 ? '' : 's'} found. Do not trust this voyage.`}
             </p>
             {!verdict.ok && <ul className="audit-errors">{verdict.errors.slice(0, 12).map((e, i) => <li key={i}>{e}</li>)}</ul>}
+            {verdict.warnings?.length > 0 && (
+              <ul className="audit-warnings">
+                {verdict.warnings.slice(0, 6).map((warning, i) => <li key={i}>{warning}</li>)}
+              </ul>
+            )}
             <p className="muted tiny">Hands revealed: {audit?.complete ? 'all' : 'incomplete'} · audit document {audit ? 'present' : 'not yet served'}</p>
           </>
         )}

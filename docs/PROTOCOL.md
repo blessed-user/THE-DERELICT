@@ -93,7 +93,10 @@ play salt are kept in memory/localStorage so a refresh does not forfeit the hand
     a, b, humanSide, bankrollZats, potZats,
     roles, chips, rounds: [...], hands: {...}, winnerSeat, split, forfeit, ...
   },
-  settlement: { winnerSeat, split, houseWon, stakeZats, bankrollZats, potZats, payoutZats, ... },
+  settlement: {
+    winnerSeat, split, houseWon, stakeZats, bankrollZats, potZats, payoutZats,
+    economyAnchor: { version, hash, memo, txid, status, ... } | null
+  },
   complete: boolean
 }
 ```
@@ -111,9 +114,14 @@ play salt are kept in memory/localStorage so a refresh does not forfeit the hand
 - checks the settlement arithmetic: the surviving Act I stack determines the bankroll,
   the house matches it in the back room, a human win pays the matched pot, and a split
   returns the bankroll;
+- if present, recomputes the economy commitment hash and checks its table-bound memo;
 - errors if `complete` is false (someone left before revealing their hand).
 
-The CLI wrapper is `scripts/verify-audit.mjs <file|->`.
+The CLI wrapper is `scripts/verify-audit.mjs <file|->`. This checks game integrity offline;
+it does not prove the transaction exists. Add `--verify-chain` with `ZECD_URL`,
+`ZECD_USER`, and `ZECD_PASS` set to a trusted wallet RPC endpoint to require an exact txid
+and memo match with at least one confirmation. Because shielded memos are private, this
+checks wallet-returned transaction details rather than a public-chain proof.
 
 ## 6. Settlement
 
@@ -127,6 +135,12 @@ The CLI wrapper is `scripts/verify-audit.mjs <file|->`.
   `floor(chipsEnd * stakeZats / 40)`, the back room starts both sides at 100 chips worth
   that bankroll, and the pot is twice the bankroll. Payout is asynchronous and its txid
   (or error) is published in the settlement snapshot.
+- A staked settlement commits the downloadable audit's economy ledger hash in the shielded
+  memo of its payout. On regtest only, if no payout is due, the house sends a 1-zatoshi
+  shielded receipt to the player's payout address with that memo, so the recipient can
+  inspect it. This is an end-of-run commitment, not a ZEC transaction for each trade; chips
+  and stars are not native Zcash assets. The memo is shielded and is not publicly readable
+  by arbitrary observers.
 - A test wallet is a house-custodied ledger attached to one of the house's shielded
   addresses. `POST /api/test-wallet/pay` debits the fare and sends the shielded deposit;
   a successful payout to that address is credited back to the ledger.

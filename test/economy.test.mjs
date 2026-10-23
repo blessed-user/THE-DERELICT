@@ -12,7 +12,7 @@ import { join } from 'node:path';
 
 import { START_CHIPS, ECARD_START_CHIPS } from '../shared/constants.js';
 import {
-  bankrollZatsFor, duelChipZats, finalPayoutZats, potZatsFor,
+  bankrollZatsFor, duelChipZats, economyCommitmentHash, finalPayoutZats, potZatsFor,
 } from '../shared/economy.js';
 import { verifyAudit } from '../shared/audit.js';
 import { Table } from '../server/game.mjs';
@@ -101,6 +101,25 @@ test('settlement pays the surviving stack and the audit re-derives it', async ()
   tampered.finale.bankrollZats += 1;
   const bad = await verifyAudit(tampered);
   assert.ok(bad.errors.some((error) => /bankroll/i.test(error)), bad.errors.join('\n'));
+  table.dispose();
+});
+
+test('economy commitment ignores settlement metadata and hand reveals but binds ledger changes', async () => {
+  const table = soloTable();
+  arrangeFinale(table, { humanChips: 200, humanChipsEnd: 32, opponentChips: 0 });
+  const hash = await economyCommitmentHash(table.audit);
+  const laterAudit = structuredClone(table.audit);
+  laterAudit.settlement.status = 'paid';
+  laterAudit.settlement.txid = 'a'.repeat(64);
+  laterAudit.settlement.economyAnchor = { hash, txid: 'b'.repeat(64), status: 'published' };
+  laterAudit.complete = !laterAudit.complete;
+  laterAudit.log.push({ seq: 100, text: 'later settlement event' });
+  laterAudit.act1.seats[0].act1HandReveal = { cards: ['rock'], salts: ['later'] };
+  laterAudit.finale.hands = [{ side: 'a', reveal: { cards: ['special'] } }];
+  assert.equal(await economyCommitmentHash(laterAudit), hash);
+
+  laterAudit.act1.seats[0].chipsEnd -= 1;
+  assert.notEqual(await economyCommitmentHash(laterAudit), hash);
   table.dispose();
 });
 

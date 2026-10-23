@@ -291,6 +291,13 @@ export class Table {
     this._emit();
   }
 
+  setEconomyAnchor(anchor) {
+    if (!this.settlement) return;
+    this.settlement.economyAnchor = anchor;
+    this.audit = this.buildAudit();
+    this._emit();
+  }
+
   _eligible() {
     return this.seats.filter((s) => s.alive && s.cardsLeft > 0);
   }
@@ -1495,6 +1502,7 @@ export class Table {
         status: this.settlement.status,
         txid: this.settlement.txid,
         walletCredited: this.settlement.walletCredited,
+        economyAnchor: this.settlement.economyAnchor ?? null,
       } : null,
       canStart: this.status === 'lobby' && seat?.seat === 0,
     };

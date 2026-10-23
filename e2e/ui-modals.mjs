@@ -191,11 +191,11 @@ try {
     try {
       await page.goto(BASE, { waitUntil: 'networkidle0' });
       assert.ok(await clickButton(page, /STAKE A FARE/i), 'no staked button');
-      await waitText(page, 'NAME YOUR FARE');
+      await waitText(page, 'CHOOSE YOUR ENTRY FARE');
       const inputs = await page.$$('input');
       assert.ok(inputs.length >= 2, 'stake form missing inputs');
       await inputs[1].type(PAYOUT_UA, { delay: 0 });
-      assert.ok(await clickButton(page, /OPEN THE TABLE/i), 'no stake submit');
+      assert.ok(await clickButton(page, /CONTINUE TO PAYMENT/i), 'no fare payment continue button');
       await waitText(page, 'SEND THE FARE', 30_000);
 
       assert.ok(await clickButton(page, /LEAVE THE FARE/i), 'no fare leave button');

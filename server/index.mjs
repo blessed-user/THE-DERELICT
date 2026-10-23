@@ -20,6 +20,7 @@ import {
   PHASE_MS, SEATS, GAME_NAME,
 } from '../shared/constants.js';
 import { randomHex } from '../shared/crypto.js';
+import { economyCommitmentHash } from '../shared/economy.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const WEB_DIST = join(ROOT, 'web', 'dist');
@@ -188,33 +189,62 @@ async function onSettle(table) {
   // issued; the durable DB does not need the table-to-UA link.
   try { store.clearPayoutAddress(table.id); } catch { /* best effort */ }
   const settlement = table.settlement;
-  if (!settlement?.payoutZats || table._payoutStarted) return;
-  table._payoutStarted = true;
+  if (table.mode !== 'solo' || !settlement || table._economyAnchorStarted) return;
+  table._economyAnchorStarted = true;
+  let hash = null;
+  let memo = null;
+  const chainMode = chain.mode;
   try {
-    const txid = await chain.payout({
-      to: settlement.winnerUa,
-      zats: settlement.payoutZats,
-      tableId: table.id,
-    });
-    // A test wallet is a house-custodied ledger entry attached to one of our
-    // shielded addresses. If the winner used one, mirror the confirmed payout
-    // into that ledger so the next staked run can draw on it.
-    try {
-      const winnerWallet = store.testWalletByAddress(settlement.winnerUa);
-      if (winnerWallet) {
-        store.creditTestWallet(winnerWallet.token, settlement.payoutZats);
-        settlement.walletCredited = true;
+    hash = await economyCommitmentHash(table.audit ?? table.buildAudit());
+    memo = `derelict:v1|economy|${table.id}|${hash}`;
+    table.setEconomyAnchor({ version: 1, chainMode, hash, memo, txid: null, status: 'pending' });
+    let txid;
+    if (settlement.payoutZats > 0) {
+      txid = await chain.payout({
+        to: settlement.winnerUa,
+        zats: settlement.payoutZats,
+        memo,
+      });
+      // A test wallet is a house-custodied ledger entry attached to one of our
+      // shielded addresses. If the winner used one, mirror the confirmed payout
+      // into that ledger so the next staked run can draw on it.
+      try {
+        const winnerWallet = store.testWalletByAddress(settlement.winnerUa);
+        if (winnerWallet) {
+          store.creditTestWallet(winnerWallet.token, settlement.payoutZats);
+          settlement.walletCredited = true;
+        }
+      } catch (error) {
+        console.error('[test-wallet] payout credit failed:', error.message);
       }
-    } catch (error) {
-      console.error('[test-wallet] payout credit failed:', error.message);
+      table.setPayout(txid);
+    } else {
+      if (chainMode !== 'regtest') {
+        throw new Error('standalone economy audit receipts are only enabled on regtest');
+      }
+      const humanSeat = table.seats.find((seat) => !seat.isBot);
+      if (!humanSeat?.ua) throw new Error('the staked seat has no shielded address for its audit receipt');
+      txid = await chain.anchorEconomy({ to: humanSeat.ua, memo });
     }
-    table.setPayout(txid);
-    console.log(`[payout] ${table.id} ${settlement.payoutZats} zats -> ${txid}`);
+    if (typeof txid !== 'string' || !/^[0-9a-f]{64}$/.test(txid)) {
+      throw new Error('zecd returned no valid transaction ID for the settlement');
+    }
+    table.setEconomyAnchor({ version: 1, chainMode, hash, memo, txid, status: 'published' });
+    console.log(`[economy-anchor] ${table.id} ${hash} -> ${txid}`);
   } catch (error) {
-    table.setPayout(null, error.message);
-    console.error(`[payout] ${table.id} failed: ${error.message}`);
+    if (settlement.payoutZats > 0) table.setPayout(null, error.message);
+    table.setEconomyAnchor({
+      version: 1,
+      chainMode,
+      hash,
+      memo,
+      txid: null,
+      status: 'failed',
+      error: error.message,
+    });
+    console.error(`[economy-anchor] ${table.id} failed: ${error.message}`);
   }
-  try { store.recordSettlement(table); } catch { /* best effort */ }
+  try { store.recordSettlement(table); } catch (error) { console.error('[store]', error.message); }
 }
 
 function makeTable({ mode, stakeZats = 0, playerIdValue = null, ua = null, handle = null, walletToken = null }) {

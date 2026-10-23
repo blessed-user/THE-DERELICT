@@ -90,11 +90,14 @@ the other players, not from the dealer. The precise guarantees and limits are in
 A solo run is one human against three house seats. The fare is a real shielded ZEC
 transaction to a fresh address, bound by a memo (`derelict:<tableId>:<seat>`). The fare
 becomes the player's bankroll: at the start of Act I each chip is worth
-`stake / 40`, and every side deal, loan and dealer trade moves that value. The surviving
-stack is rescaled onto 100 back-room chips, which the house matches. A human win pays the
-matched pot (2× the bankroll); a split returns the bankroll; an Act I elimination or a lost
-duel returns nothing. This is a custodial house bankroll, not an escrow contract — see the
-threat model.
+`stake / 40`. Side deals, loans, dealer trades, and duel bets change the game's off-chain
+chip/star ledger; they do not trigger individual ZEC transfers. At settlement, the audit
+ledger is SHA-256 committed in a shielded transaction memo: it rides with a payout, or a
+1-zatoshi receipt is sent to the player's payout address on regtest when there is no payout.
+The surviving stack is rescaled onto 100 back-room chips, which the house matches. A human
+win pays the matched pot (2× the bankroll); a split returns the bankroll; an Act I elimination
+or a lost duel returns nothing beyond the audit receipt. This is a custodial house
+bankroll, not an escrow contract — see the threat model.
 
 Practice and private tables are free and use play money.
 
@@ -106,8 +109,14 @@ Practice and private tables are free and use play money.
   wallet. The player sends the exact stake with a table-bound memo. The server watches
   `listtransactions` for a receive row with that memo.
 - **Payout:** `z_sendmany` from the house's shielded bankroll to the winner's unified
-  address (`u1…`), with a payout memo. The regtest stack mines a block so the transaction
-  confirms immediately.
+  address (`u1…`), with a memo containing the settled economy-audit hash. The regtest stack
+  mines a block so the transaction confirms immediately.
+- **Regtest audit receipt when no payout is due:** the house sends 1 zatoshi to the player's
+  registered shielded payout address with the same audit-hash memo. The output lets the
+  player inspect the recipient-side memo using their wallet; it is not a game payout.
+- **Economy limitation:** chips and stars are game accounting units, not independent ZEC
+  assets. Individual trades are not chain transactions; the end-of-run commitment binds
+  their full downloadable ledger to a shielded transaction.
 - **No transparent addresses are used for settlement.** The house refuses to pay itself
   and validates that the player's payout address is a shielded address.
 - The regtest demo can pay a player's fare from the house bankroll, so a judge can walk
@@ -207,6 +216,19 @@ Every settled table exposes `GET /api/tables/:id/audit`. To verify one independe
 node scripts/verify-audit.mjs e2e/audit.json
 ```
 
+The offline command verifies the game record and the claimed commitment hash, but it cannot
+prove a shielded transaction exists. To verify the transaction and memo using a wallet that
+can see its shielded outputs, configure trusted wallet RPC credentials in `ZECD_URL`,
+`ZECD_USER`, and `ZECD_PASS`, then run:
+
+```bash
+node scripts/verify-audit.mjs e2e/audit.json --verify-chain
+```
+
+The chain check passes only when the configured wallet returns the exact txid and memo with
+at least one confirmation. It is a wallet-backed check, not a public proof: use a wallet/node
+you trust. Do not send mainnet RPC credentials to an untrusted host.
+
 The verifier is also bundled into the browser; the result screen runs it locally and shows
 the verdict. It checks, among other things:
 
@@ -217,8 +239,12 @@ the verdict. It checks, among other things:
 - the finalists, the duel hands, every duel commitment and bet, and the chip transfers;
 - the settlement arithmetic, and that the audit is complete.
 
-A complete audit does **not** prove the money moved. Chain settlement is checked
-separately by the player's wallet and the server's payout record.
+A complete audit does **not** prove the money moved. The audit commitment binds the
+downloaded ledger to a shielded transaction memo; check the transaction in the receiving
+wallet. The offline verifier checks the commitment hash and memo string in the audit file,
+but cannot establish that the reported transaction exists or carries that memo. Its
+“GAME AUDIT OK” result verifies the game record only; it does not verify chain settlement.
+This does not turn each chip/star move into a ZEC transfer.
 
 ---
 

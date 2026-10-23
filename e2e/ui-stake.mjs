@@ -56,13 +56,13 @@ try {
   await waitText('THE DERELICT', 10_000);
 
   if (!(await clickButton(/STAKE A FARE/i))) throw new Error('no staked button');
-  await waitText('NAME YOUR FARE', 10_000);
+  await waitText('CHOOSE YOUR ENTRY FARE', 10_000);
 
   const inputs = await page.$$('input');
   if (inputs.length < 2) throw new Error('stake form missing inputs');
   await inputs[1].type(PAYOUT_UA, { delay: 0 });
 
-  if (!(await clickButton(/OPEN THE TABLE/i))) throw new Error('could not submit stake form');
+  if (!(await clickButton(/CONTINUE TO PAYMENT/i))) throw new Error('could not continue to fare payment');
   await waitText('SEND THE FARE', 30_000);
   await page.screenshot({ path: join(ROOT, 'e2e', 'ui-deposit.png'), fullPage: true });
 

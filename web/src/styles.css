@@ -608,6 +608,32 @@ input:disabled { opacity: 0.5; }
 .wallet-choice label.on { color: var(--bone); }
 .wallet-choice input[type="radio"] { accent-color: var(--sodium); }
 .wallet-choice .field-block { margin: 0; }
+.stake-wallet-balance {
+  display: grid;
+  gap: 3px;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  background: #090807;
+}
+.stake-wallet-balance span,
+.stake-wallet-balance small {
+  color: var(--ash);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.stake-wallet-balance strong {
+  color: var(--sodium-soft);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+}
+.stake-next-step {
+  margin: 0;
+  color: var(--bone-dim);
+  font-size: 12px;
+  line-height: 1.55;
+}
 .wallet-short {
   margin: 0;
   border-left: 2px solid var(--blood);
@@ -1158,6 +1184,32 @@ input:disabled { opacity: 0.5; }
   color: var(--ash);
 }
 .payout { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--sodium-soft); }
+.economy-anchor {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--line-hot);
+  padding-top: 14px;
+  color: var(--bone-dim);
+}
+.economy-anchor h3 {
+  color: var(--sodium-soft);
+  font-size: 17px;
+  letter-spacing: 0.1em;
+}
+.economy-anchor.failed h3 { color: #e06a52; }
+.economy-anchor p { margin: 0; }
+.economy-anchor > div { display: grid; gap: 3px; }
+.economy-anchor > div > span {
+  color: var(--ash);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+.economy-anchor code {
+  color: var(--bone);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
 .result-money {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -1184,6 +1236,15 @@ input:disabled { opacity: 0.5; }
 .audit-panel { border-color: var(--line-hot); }
 .audit-panel.ok { border-left: 3px solid var(--moss); }
 .audit-panel.bad { border-left: 3px solid var(--blood); }
+.audit-warnings {
+  margin: 8px 0 0;
+  padding: 9px 12px 9px 28px;
+  border: 1px solid var(--line-hot);
+  background: rgba(255, 122, 24, 0.06);
+  color: var(--sodium-soft);
+  font-size: 12px;
+  line-height: 1.5;
+}
 .audit-errors { margin: 8px 0; padding-left: 18px; font-family: var(--font-mono); font-size: 11.5px; color: #e2937e; }
 .audit-panel code { color: var(--sodium-soft); }
 

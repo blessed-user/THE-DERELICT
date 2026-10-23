@@ -18,12 +18,40 @@ import {
   RPS_HAND, START_STARS, START_CHIPS, STAR_DEALER_BUY, STAR_DEALER_SELL,
   LOAN_PRINCIPAL, LOAN_REPAY, ECARD_START_CHIPS, ECARD_ROUNDS,
 } from './constants.js';
-import { bankrollZatsFor, finalPayoutZats, potZatsFor } from './economy.js';
+import {
+  bankrollZatsFor, economyCommitmentHash, finalPayoutZats, potZatsFor,
+} from './economy.js';
 import { rpsOutcome, rankSurvivors } from './rps.js';
 import { handFor, ecardOutcome, ecardTransfer, duelWinner, validBet } from './ecard.js';
 
 const HEX64 = /^[0-9a-f]{64}$/;
 const RPS_CARDS = new Set(['rock', 'paper', 'scissors']);
+
+export function verifyEconomyAnchorTransaction(audit, transactions) {
+  const anchor = audit?.settlement?.economyAnchor;
+  if (!anchor?.txid || !HEX64.test(anchor.txid)) {
+    return { ok: false, reason: 'audit has no valid economy-anchor transaction ID' };
+  }
+  if (!Array.isArray(transactions)) {
+    return { ok: false, reason: 'wallet returned no transaction list' };
+  }
+
+  const matchingTransactions = transactions.filter((transaction) => transaction?.txid === anchor.txid);
+  if (!matchingTransactions.length) {
+    return { ok: false, reason: 'transaction was not found in the configured wallet' };
+  }
+
+  const memoRows = matchingTransactions.filter((transaction) => transaction.memoStr === anchor.memo);
+  if (!memoRows.length) {
+    return { ok: false, reason: 'transaction does not contain the expected memo in the configured wallet' };
+  }
+
+  const confirmations = Math.max(...memoRows.map((transaction) => Number(transaction.confirmations) || 0));
+  if (confirmations < 1) {
+    return { ok: false, reason: 'transaction and memo were found but are not yet confirmed', confirmations };
+  }
+  return { ok: true, confirmations };
+}
 
 function countCards(cards) {
   const counts = {};
@@ -31,7 +59,7 @@ function countCards(cards) {
   return counts;
 }
 
-export async function verifyAudit(audit) {
+export async function verifyAudit(audit, { chainTransactions = null } = {}) {
   const errors = [];
   const warnings = [];
   const err = (message) => errors.push(message);
@@ -397,6 +425,31 @@ export async function verifyAudit(audit) {
       finale: f,
     });
     if (s.payoutZats !== expectedPayout) err(`settlement payout ${s.payoutZats}, expected ${expectedPayout}`);
+  }
+
+  const economyAnchor = audit.settlement?.economyAnchor;
+  if (economyAnchor) {
+    if (!HEX64.test(economyAnchor.hash ?? '')) {
+      err('economy anchor has an invalid hash');
+    } else {
+      const expectedHash = await economyCommitmentHash(audit);
+      if (economyAnchor.hash !== expectedHash) err('economy anchor hash does not match the audited chip and star history');
+      if (economyAnchor.memo !== `derelict:v1|economy|${tableId}|${economyAnchor.hash}`) {
+        err('economy anchor memo does not match the voyage and audit hash');
+      }
+    }
+    if (economyAnchor.txid && !HEX64.test(economyAnchor.txid)) {
+      err('economy anchor has an invalid transaction ID');
+    } else if (economyAnchor.txid) {
+      if (chainTransactions) {
+        const chainVerdict = verifyEconomyAnchorTransaction(audit, chainTransactions);
+        if (!chainVerdict.ok) warn(`economy anchor chain verification failed: ${chainVerdict.reason}`);
+      } else {
+        warn('economy anchor transaction ID format is valid, but the transaction and shielded memo were not verified offline');
+      }
+    } else if (!economyAnchor.txid) {
+      warn('economy audit commitment was not published on chain');
+    }
   }
 
   if (!audit.complete) err('audit is incomplete: at least one full hand was not revealed');

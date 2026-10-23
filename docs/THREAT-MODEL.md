@@ -38,6 +38,7 @@ conflicts with the README, this document wins.
 | Duel hand composition | Audited | One SPECIAL + four CITIZENS checked by the verifier |
 | Private offers vs. other players | Hidden | Per-seat snapshots; only sender/recipient receive the offer |
 | On-chain entry/payout | Shielded | Fresh shielded address per table, shielded `z_sendmany` payout |
+| Staked economy audit | Hash-committed at settlement | Digest is in the shielded payout memo, or a regtest-only 1-zatoshi receipt when no payout is due; individual trades are not transactions |
 | Table self-dealing | Payout address cannot belong to the house wallet | `z_validateaddress` check at table creation |
 | Post-match consistency | Independently verifiable | `shared/audit.js` rebuilds roots and replays the ledger |
 

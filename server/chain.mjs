@@ -234,8 +234,16 @@ export class Chain {
     return this.waitForOperation(opid);
   }
 
-  async payout({ to, zats, tableId }) {
-    const result = await this.send({ to, zats, memo: `derelict-payout:${tableId}` });
+  async payout({ to, zats, memo }) {
+    const result = await this.send({ to, zats, memo });
+    if (this.autoMine) {
+      try { await this.mine(1); } catch { /* the node may be unavailable */ }
+    }
+    return result.txid;
+  }
+
+  async anchorEconomy({ to, memo }) {
+    const result = await this.send({ to, zats: 1, memo });
     if (this.autoMine) {
       try { await this.mine(1); } catch { /* the node may be unavailable */ }
     }
