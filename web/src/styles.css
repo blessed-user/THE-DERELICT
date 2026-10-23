@@ -568,6 +568,27 @@ input:disabled { opacity: 0.5; }
   letter-spacing: 0.08em;
   color: var(--sodium-soft);
 }
+.stake-outcome {
+  margin: 14px 0 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.stake-outcome strong {
+  color: var(--sodium-soft);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+}
+.stake-outcome p {
+  margin: 6px 0 0;
+  color: var(--bone-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.trade-economy-note {
+  max-width: 58ch;
+  margin: -4px 0 14px;
+}
 .wallet-choice {
   display: grid;
   gap: 10px;

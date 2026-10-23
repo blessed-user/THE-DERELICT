@@ -208,7 +208,7 @@ export function RulesModal({ open, onClose }) {
             changes hands per bet.
           </p>
           <ol className="how-steps">
-            <li><strong>NAME YOUR FARE.</strong> In <strong>STAKE A FARE</strong> you type the fare: 0.01–0.20 ZEC, default 0.05. You also choose where a payout goes — your test wallet or a shielded address you control.</li>
+            <li><strong>CHOOSE YOUR ENTRY FARE.</strong> In <strong>STAKE A FARE</strong>, choose 0.01–0.20 ZEC (default 0.05). Choose your test wallet or enter a shielded address for any payout.</li>
             <li><strong>PAY ONCE, SHIELDED.</strong> Send the exact fare to the table&apos;s fresh address with the memo shown, or press <strong>PAY THE FARE FROM TEST WALLET</strong>. The house holds it as your bankroll; it is not a bet against another player.</li>
             <li><strong>CHIPS CARRY THE VALUE.</strong> The fare buys your 40 Act I chips, so one chip is worth fare ÷ 40. Trade chips away and you carry less into the back room; win chips and you carry more.</li>
             <li><strong>THE HOUSE MATCHES THE BACK ROOM.</strong> Your surviving chips are rescaled to 100 back-room chips worth your surviving bankroll. The house puts up the same amount, making the pot 2× your bankroll.</li>
@@ -988,28 +988,33 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
   return (
     <div className="center-screen">
       <form className="panel stake" onSubmit={submit}>
-        <p className="eyebrow">STAKED RUN</p>
-        <h2>NAME YOUR FARE</h2>
+        <h2>CHOOSE YOUR ENTRY FARE</h2>
         <p className="muted">
-          The fare becomes your bankroll; the house holds it for the voyage. It buys {startChips} Act I
-          chips, your surviving stack is rescaled onto {duelChips} back-room chips and the house matches
-          it. Deals and duel bets move chips, not ZEC. One payout settles the run: win takes the matched
-          pot, a split returns your bankroll.
+          This is the ZEC amount you pay to enter. It buys {startChips} Act I chips and is held by the
+          house as your bankroll. Your chips and stars change during the voyage; they are not separate
+          ZEC transactions.
         </p>
         <div className="field-block">
-          <label>FARE (ZEC) · {min.toFixed(2)}–{max.toFixed(2)}</label>
-          <input type="number" step="0.0001" min={min} max={max} value={zecAmount} onChange={(e) => setZecAmount(e.target.value)} />
+          <label htmlFor="stake-fare">ENTRY AMOUNT · {min.toFixed(2)}–{max.toFixed(2)} ZEC</label>
+          <input id="stake-fare" type="number" step="0.0001" min={min} max={max} value={zecAmount} onChange={(e) => setZecAmount(e.target.value)} />
         </div>
         <p className="stake-breakdown">
-          1 Act I chip = {chipZec == null ? '—' : `${(chipZec).toFixed(4)} ZEC`} ·
-          back-room chip = {chipZec == null ? '—' : `${(chipZec * startChips / duelChips).toFixed(4)} ZEC`}
+          At this fare, each Act I chip represents {chipZec == null ? '—' : `${chipZec.toFixed(5)} ZEC`}.
         </p>
+        <div className="stake-outcome">
+          <strong>HOW THE PAYOUT WORKS</strong>
+          <p>
+            At the back room, your surviving chips become your bankroll, shown as {duelChips} duel chips.
+            The house matches that bankroll. Win and you receive both; tie and you get your bankroll
+            back; lose and there is no payout.
+          </p>
+        </div>
 
         {wallet?.address ? (
           <div className="wallet-choice">
             <label className={payFromWallet ? 'on' : ''}>
               <input type="radio" name="fare-source" checked={payFromWallet} onChange={() => setPayFromWallet(true)} />
-              PAY FROM TEST WALLET
+              PAY WITH TEST WALLET
             </label>
             <span className="muted tiny">
               ledger {(balance / 1e8).toFixed(4)} ZEC · {wallet.address.slice(0, 16)}…
@@ -1017,12 +1022,13 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
             <button type="button" className="btn small ghost" onClick={onWallet}>FAUCET / PROFILE</button>
             <label className={!payFromWallet ? 'on' : ''}>
               <input type="radio" name="fare-source" checked={!payFromWallet} onChange={() => setPayFromWallet(false)} />
-              PAY FROM AN EXTERNAL WALLET
+              PAY WITH EXTERNAL WALLET
             </label>
             {!payFromWallet && (
               <div className="field-block">
-                <label>SHIELDED PAYOUT ADDRESS (u1… or zs…)</label>
+                <label>SHIELDED ADDRESS FOR YOUR PAYOUT</label>
                 <input value={ua} onChange={(e) => setUa(e.target.value)} placeholder="u1…" autoComplete="off" spellCheck={false} />
+                <p className="muted tiny">Enter a Unified Address (u1…) or Sapling address (zs…). You will need to send the fare with the table memo.</p>
               </div>
             )}
             {payFromWallet && !enough && (
@@ -1034,13 +1040,13 @@ export function StakePrompt({ config, wallet, walletInfo, onSubmit, onCancel, on
           </div>
         ) : (
           <div className="field-block">
-            <label>SHIELDED PAYOUT ADDRESS (u1… or zs…)</label>
+            <label>SHIELDED ADDRESS FOR YOUR PAYOUT</label>
             <input value={ua} onChange={(e) => setUa(e.target.value)} placeholder="u1…" autoComplete="off" spellCheck={false} />
-            <p className="muted tiny">No test wallet yet. Create one from PROFILE to skip pasting an address.</p>
+            <p className="muted tiny">Enter a Unified Address (u1…) or Sapling address (zs…). You will need to send the fare with the table memo. Create a test wallet from PROFILE to pay without an external wallet.</p>
           </div>
         )}
 
-        <p className="muted tiny">Custodial house bankroll, not an escrow contract. Demo infrastructure; wager only what you can lose.</p>
+        <p className="muted tiny">The house holds the fare; it is not protected by an escrow contract. Regtest demo only—never use a funded wallet.</p>
         {notice && <div className={`notice ${notice.tone ?? ''}`}>{notice.text}</div>}
         <div className="btn-row">
           <button type="submit" className="btn primary" disabled={busy || !canSubmit}>{busy ? 'OPENING…' : 'OPEN THE TABLE'}</button>
@@ -1144,6 +1150,10 @@ export function TradePanel({ state, onOffer, onRespond, onDealer, onLoan, onTaun
     <div className="action-panel-stack">
       <section className="panel action-panel">
         <header className="panel-head"><span>SIDE DEALS</span><span className="panel-head-sub">SEALED NOTES</span></header>
+        <p className="muted tiny trade-economy-note">
+          Deals and dealer trades move chips or stars, never ZEC directly. In a staked run, your
+          remaining chips determine your ZEC bankroll; in free tables, chips have no cash value.
+        </p>
         {!!state.offersToYou?.length && (
           <div className="offers">
             {state.offersToYou.map((o) => (
