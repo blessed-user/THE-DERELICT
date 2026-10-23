@@ -12,6 +12,35 @@ it, and derives the WebSocket URL from the same origin unless `VITE_WS_BASE` is 
 server accepts the front end's origin through `APP_ORIGIN` for both HTTP and the WebSocket
 upgrade.
 
+## Launch and redeploy from GitHub
+
+`.railway/railway.ts` defines the four Railway services, their Dockerfiles, regions, and
+persistent volumes. The services track `main` in `blessed-user/THE-DERELICT`; after the
+initial setup, Railway rebuilds them when GitHub receives a push to that branch. Changes
+to the Railway infrastructure file are previewed on pull requests and applied after a
+pull request is merged by `.github/workflows/railway-config.yml`.
+
+One-time setup:
+
+1. Give Railway's GitHub App access to `blessed-user/THE-DERELICT`.
+2. Create or select the Railway project and its `production` environment in region
+   `iad`, then link this checkout with `railway link`.
+3. Run `railway config plan` and review the proposed changes. This configuration manages
+   the existing services and volumes, so do not apply a plan that proposes deleting a
+   resource you want to keep.
+4. Apply the reviewed plan with `railway config apply`. The services will use this
+   repository's `main` branch.
+5. Create a Railway project token scoped to the production environment and add it to the
+   GitHub repository as the `RAILWAY_TOKEN` Actions secret.
+6. Configure the service variables in the sections below. They are deliberately not
+   stored in IaC; in particular, keep `ZECD_MNEMONIC` in Railway and use only the
+   published demo regtest seed, never a personal wallet seed.
+
+The checked-in workflow plans configuration changes for same-repository pull requests
+and applies them after merge. It does not expose the Railway token to fork pull requests.
+Ordinary code pushes are deployed by Railway's GitHub source integration; they do not
+need a separate GitHub Actions deploy token.
+
 ## What can run where
 
 | Piece | Vercel | Railway |

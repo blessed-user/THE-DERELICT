@@ -22,6 +22,7 @@ docker/zecd/*
 docker/railway/*
 !docker/railway/Zebra.Dockerfile
 !docker/railway/Bootstrap.Dockerfile
+!docker/railway/zebrad-entrypoint.sh
 docs
 e2e
 !e2e/

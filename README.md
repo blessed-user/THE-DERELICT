@@ -153,7 +153,9 @@ the Docker stack below remains the recommended demo. For the split:
 Vercel cannot host the Node/WebSocket server, and the full Zebra + zecd staked stack is
 not a Vercel service. Full steps, Railway variables, volumes, and the staked-mode
 setup are in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). The checked-in
-`vercel.json` and `railway.json` are the deployment metadata.
+`.railway/railway.ts` and GitHub Actions workflow define the repeatable Railway
+infrastructure and redeploy process; see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for
+the one-time setup and required service variables.
 
 ### Self-contained regtest stack (zebra + zecd + app)
 
